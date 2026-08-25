@@ -1,0 +1,33 @@
+[project]
+name = "ham-triage"
+version = "0.1.0"
+description = "Leakage audit, calibration, conformal sets and cost-sensitive deferral on HAM10000"
+requires-python = ">=3.12"
+dependencies = [
+    "torch==2.11.0",
+    "timm>=1.0",
+    "kagglehub",
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "pillow",
+    "scikit-learn",
+    "scipy",
+    "matplotlib",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+# torch has to come from the cu126 index; the PyPI wheel is CPU-only on Windows
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

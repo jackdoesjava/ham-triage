@@ -1,0 +1,51 @@
+{
+ "run_id": "clean_s1",
+ "seed": 1,
+ "split": "audit",
+ "train_col": "clean_train",
+ "n_train": 5914,
+ "config": {
+  "model": "efficientnet_b0",
+  "epochs": 15,
+  "batch_size": 32,
+  "lr": 0.0003,
+  "weight_decay": 0.01,
+  "warmup_epochs": 1,
+  "crop": 224,
+  "drop_rate": 0.2,
+  "drop_path_rate": 0.1,
+  "amp": true,
+  "loss": "ce"
+ },
+ "classes": [
+  "akiec",
+  "bcc",
+  "bkl",
+  "df",
+  "mel",
+  "nv",
+  "vasc"
+ ],
+ "train_loss": [
+  1.8125947626388592,
+  0.6163125765388426,
+  0.4713395585346481,
+  0.4039539230744476,
+  0.3115898593045447,
+  0.25405633322003746,
+  0.21487626158024953,
+  0.18700207161474164,
+  0.14320836264802062,
+  0.11633901538469059,
+  0.09716197703560085,
+  0.0859112048182515,
+  0.06591881431117856,
+  0.07022423894301502,
+  0.0674604756388125
+ ],
+ "minutes": 17.6,
+ "torch": "2.11.0+cu126",
+ "timm": "1.0.28",
+ "pretrained": "timm/efficientnet_b0.ra_in1k",
+ "device": "NVIDIA GeForce GTX 1050 Ti"
+}

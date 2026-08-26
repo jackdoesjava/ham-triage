@@ -382,6 +382,18 @@ def conformal(paths: Paths, alpha: float = 0.1, n_boot: int = 1000, n_repartitio
     return out
 
 
+def defer_knob_for_rate(p: np.ndarray, rate: float, cm: CostModel) -> float:
+    # deferral rate is monotone in the defer price, so bisect on its log against the cal set
+    lo, hi = np.log(1e-4), np.log(cm.refer)
+    for _ in range(40):
+        mid = (lo + hi) / 2
+        if (bayes_actions(p, cm, np.exp(mid)) == DEFER).mean() > rate:
+            lo = mid
+        else:
+            hi = mid
+    return float(np.exp((lo + hi) / 2))
+
+
 def decision(paths: Paths, cm: CostModel = CostModel(), n_boot: int = 1000, target_defer: float = 0.2) -> dict:
     meta, split, test = load_test(paths)
     cal = split.cal.values
@@ -412,15 +424,7 @@ def decision(paths: Paths, cm: CostModel = CostModel(), n_boot: int = 1000, targ
         return out
 
     def bayes_cost_for_rate(p, rate, c=cm):
-        # deferral rate is monotone in the defer cost, so bisect on log d against the cal set
-        lo, hi = np.log(1e-4), np.log(c.refer)
-        for _ in range(40):
-            mid = (lo + hi) / 2
-            if (bayes_actions(p, c, np.exp(mid)) == DEFER).mean() > rate:
-                lo = mid
-            else:
-                hi = mid
-        return float(np.exp((lo + hi) / 2))
+        return defer_knob_for_rate(p, rate, c)
 
     def score_sets(p, m):
         return {"msp": 1 - p.max(1), "entropy": entropy(p), "ensemble_mi": m}
@@ -592,6 +596,62 @@ def decision(paths: Paths, cm: CostModel = CostModel(), n_boot: int = 1000, targ
     return out
 
 
+def strata(paths: Paths, cm: CostModel = CostModel(), alpha: float = 0.1, n_boot: int = 1000,
+           target_defer: float = 0.2, min_n: int = 50) -> dict:
+    # Across classes dx_type is class in disguise (every mel, bcc and akiec label is
+    # histopathology). Within nv it is not: histo-nv are nevi that looked suspicious
+    # enough to excise, follow_up-nv are monitored nevi from one device, consensus-nv
+    # are textbook cases. If the triage layer is doing its job it should treat them
+    # differently even though they share a label.
+    meta, split, test = load_test(paths)
+    cal = split.cal.values
+    y, y_cal = meta.label.values[test], meta.label.values[cal]
+    lesion = meta.lesion_id.values[test]
+    dx, dx_type = meta.dx.values[test], meta.dx_type.values[test]
+    ce = load_runs(paths, "clean")
+    seeds = sorted(ce)
+    rng = np.random.default_rng(0)
+    u_cal, u_test = rng.random(cal.sum()), rng.random(test.sum())
+
+    per_image = []  # [seed, n, metric]
+    for s in seeds:
+        t = fit_temperature(ce[s][cal], y_cal)
+        p_cal, p_test = softmax(ce[s][cal] / t, axis=1), softmax(ce[s][test] / t, axis=1)
+        actions = bayes_actions(p_test, cm, defer_knob_for_rate(p_cal, target_defer, cm))
+        sets = prediction_sets(aps_scores(p_test, u_test), quantile(aps_scores(p_cal, u_cal)[np.arange(len(y_cal)), y_cal], alpha))
+        flagged = p_test[:, MEL] >= 1 - quantile(1 - p_cal[y_cal == MEL, MEL], alpha)
+        per_image.append(np.stack([p_test.argmax(1) != y, p_test[:, MEL], actions == DEFER, actions == REFER,
+                                   flagged, sets.sum(1), sets[np.arange(len(y)), y]], axis=1).astype(float))
+    per_image = np.stack(per_image)
+    metrics = ["error_rate", "p_mel", "defer_rate", "refer_rate", "mel_flag_rate", "aps_set_size", "aps_coverage"]
+
+    groups = [(c, t) for c in ("nv", "bkl") for t in ("histo", "follow_up", "consensus", "confocal")
+              if ((dx == c) & (dx_type == t)).sum() >= min_n]
+    masks = [(dx == c) & (dx_type == t) for c, t in groups]
+
+    def stat(idx):
+        return np.stack([per_image[:, idx][:, m[idx]].mean(axis=1).mean(axis=0) for m in masks])
+
+    point = stat(np.arange(len(y)))
+    boot = cluster_bootstrap(stat, lesion, n_boot=n_boot)
+    lo, hi = ci(boot)
+    rows = []
+    for g, (c, t) in enumerate(groups):
+        for k, m in enumerate(metrics):
+            rows.append({"dx": c, "dx_type": t, "n": int(masks[g].sum()), "n_lesions": int(len(np.unique(lesion[masks[g]]))),
+                         "metric": m, "point": point[g, k], "lo": lo[g, k], "hi": hi[g, k]})
+    table = pd.DataFrame(rows)
+    out = {"seeds": seeds, "alpha": alpha, "target_defer": target_defer, "min_n": min_n,
+           "table": table.round(4).to_dict(orient="records")}
+    for g, (c, t) in enumerate(groups):
+        line = f"{c}/{t:9s} n={masks[g].sum():4d}"
+        for k, m in enumerate(("error_rate", "p_mel", "defer_rate", "refer_rate", "mel_flag_rate", "aps_set_size")):
+            j = metrics.index(m)
+            line += f"  {m} {point[g, j]:.3f} [{lo[g, j]:.3f}, {hi[g, j]:.3f}]"
+        print(line)
+    return out
+
+
 def dump(paths: Paths, name: str, obj: dict) -> None:
     (paths.results / "derived").mkdir(parents=True, exist_ok=True)
     with open(paths.results / "derived" / f"{name}.json", "w") as f:
@@ -601,6 +661,6 @@ def dump(paths: Paths, name: str, obj: dict) -> None:
 if __name__ == "__main__":
     paths = Paths()
     for name, section in (("audit", audit), ("imbalance", imbalance), ("calibration", calibration),
-                          ("conformal", conformal), ("decision", decision)):
+                          ("conformal", conformal), ("decision", decision), ("strata", strata)):
         print(f"--- {name} ---")
         dump(paths, name, section(paths))

@@ -1,0 +1,362 @@
+{
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "alpha": 0.1,
+ "target_defer": 0.2,
+ "min_n": 50,
+ "table": [
+  {
+   "dx": "nv",
+   "dx_type": "histo",
+   "n": 511,
+   "n_lesions": 460,
+   "metric": "error_rate",
+   "point": 0.1448,
+   "lo": 0.1181,
+   "hi": 0.1726
+  },
+  {
+   "dx": "nv",
+   "dx_type": "histo",
+   "n": 511,
+   "n_lesions": 460,
+   "metric": "p_mel",
+   "point": 0.1249,
+   "lo": 0.1103,
+   "hi": 0.1407
+  },
+  {
+   "dx": "nv",
+   "dx_type": "histo",
+   "n": 511,
+   "n_lesions": 460,
+   "metric": "defer_rate",
+   "point": 0.379,
+   "lo": 0.3469,
+   "hi": 0.4106
+  },
+  {
+   "dx": "nv",
+   "dx_type": "histo",
+   "n": 511,
+   "n_lesions": 460,
+   "metric": "refer_rate",
+   "point": 0.4625,
+   "lo": 0.4263,
+   "hi": 0.5
+  },
+  {
+   "dx": "nv",
+   "dx_type": "histo",
+   "n": 511,
+   "n_lesions": 460,
+   "metric": "mel_flag_rate",
+   "point": 0.4397,
+   "lo": 0.404,
+   "hi": 0.4767
+  },
+  {
+   "dx": "nv",
+   "dx_type": "histo",
+   "n": 511,
+   "n_lesions": 460,
+   "metric": "aps_set_size",
+   "point": 1.4064,
+   "lo": 1.3462,
+   "hi": 1.4659
+  },
+  {
+   "dx": "nv",
+   "dx_type": "histo",
+   "n": 511,
+   "n_lesions": 460,
+   "metric": "aps_coverage",
+   "point": 0.8871,
+   "lo": 0.8629,
+   "hi": 0.9095
+  },
+  {
+   "dx": "nv",
+   "dx_type": "follow_up",
+   "n": 715,
+   "n_lesions": 715,
+   "metric": "error_rate",
+   "point": 0.0051,
+   "lo": 0.0014,
+   "hi": 0.0099
+  },
+  {
+   "dx": "nv",
+   "dx_type": "follow_up",
+   "n": 715,
+   "n_lesions": 715,
+   "metric": "p_mel",
+   "point": 0.0048,
+   "lo": 0.0035,
+   "hi": 0.0064
+  },
+  {
+   "dx": "nv",
+   "dx_type": "follow_up",
+   "n": 715,
+   "n_lesions": 715,
+   "metric": "defer_rate",
+   "point": 0.11,
+   "lo": 0.094,
+   "hi": 0.1254
+  },
+  {
+   "dx": "nv",
+   "dx_type": "follow_up",
+   "n": 715,
+   "n_lesions": 715,
+   "metric": "refer_rate",
+   "point": 0.0247,
+   "lo": 0.0167,
+   "hi": 0.0333
+  },
+  {
+   "dx": "nv",
+   "dx_type": "follow_up",
+   "n": 715,
+   "n_lesions": 715,
+   "metric": "mel_flag_rate",
+   "point": 0.0224,
+   "lo": 0.0147,
+   "hi": 0.0306
+  },
+  {
+   "dx": "nv",
+   "dx_type": "follow_up",
+   "n": 715,
+   "n_lesions": 715,
+   "metric": "aps_set_size",
+   "point": 0.9268,
+   "lo": 0.901,
+   "hi": 0.9512
+  },
+  {
+   "dx": "nv",
+   "dx_type": "follow_up",
+   "n": 715,
+   "n_lesions": 715,
+   "metric": "aps_coverage",
+   "point": 0.8974,
+   "lo": 0.8752,
+   "hi": 0.9179
+  },
+  {
+   "dx": "nv",
+   "dx_type": "consensus",
+   "n": 104,
+   "n_lesions": 96,
+   "metric": "error_rate",
+   "point": 0.0769,
+   "lo": 0.0381,
+   "hi": 0.1277
+  },
+  {
+   "dx": "nv",
+   "dx_type": "consensus",
+   "n": 104,
+   "n_lesions": 96,
+   "metric": "p_mel",
+   "point": 0.0603,
+   "lo": 0.041,
+   "hi": 0.0803
+  },
+  {
+   "dx": "nv",
+   "dx_type": "consensus",
+   "n": 104,
+   "n_lesions": 96,
+   "metric": "defer_rate",
+   "point": 0.4199,
+   "lo": 0.3555,
+   "hi": 0.4914
+  },
+  {
+   "dx": "nv",
+   "dx_type": "consensus",
+   "n": 104,
+   "n_lesions": 96,
+   "metric": "refer_rate",
+   "point": 0.2981,
+   "lo": 0.2245,
+   "hi": 0.3758
+  },
+  {
+   "dx": "nv",
+   "dx_type": "consensus",
+   "n": 104,
+   "n_lesions": 96,
+   "metric": "mel_flag_rate",
+   "point": 0.2756,
+   "lo": 0.2041,
+   "hi": 0.3521
+  },
+  {
+   "dx": "nv",
+   "dx_type": "consensus",
+   "n": 104,
+   "n_lesions": 96,
+   "metric": "aps_set_size",
+   "point": 1.2981,
+   "lo": 1.1913,
+   "hi": 1.4233
+  },
+  {
+   "dx": "nv",
+   "dx_type": "consensus",
+   "n": 104,
+   "n_lesions": 96,
+   "metric": "aps_coverage",
+   "point": 0.9263,
+   "lo": 0.8855,
+   "hi": 0.963
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "histo",
+   "n": 141,
+   "n_lesions": 133,
+   "metric": "error_rate",
+   "point": 0.357,
+   "lo": 0.2869,
+   "hi": 0.4276
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "histo",
+   "n": 141,
+   "n_lesions": 133,
+   "metric": "p_mel",
+   "point": 0.1125,
+   "lo": 0.086,
+   "hi": 0.1399
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "histo",
+   "n": 141,
+   "n_lesions": 133,
+   "metric": "defer_rate",
+   "point": 0.3901,
+   "lo": 0.3259,
+   "hi": 0.4506
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "histo",
+   "n": 141,
+   "n_lesions": 133,
+   "metric": "refer_rate",
+   "point": 0.5343,
+   "lo": 0.4653,
+   "hi": 0.6076
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "histo",
+   "n": 141,
+   "n_lesions": 133,
+   "metric": "mel_flag_rate",
+   "point": 0.4421,
+   "lo": 0.3747,
+   "hi": 0.514
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "histo",
+   "n": 141,
+   "n_lesions": 133,
+   "metric": "aps_set_size",
+   "point": 1.8794,
+   "lo": 1.7343,
+   "hi": 2.0304
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "histo",
+   "n": 141,
+   "n_lesions": 133,
+   "metric": "aps_coverage",
+   "point": 0.8203,
+   "lo": 0.7672,
+   "hi": 0.8764
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "consensus",
+   "n": 53,
+   "n_lesions": 52,
+   "metric": "error_rate",
+   "point": 0.1824,
+   "lo": 0.1061,
+   "hi": 0.2667
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "consensus",
+   "n": 53,
+   "n_lesions": 52,
+   "metric": "p_mel",
+   "point": 0.0834,
+   "lo": 0.0447,
+   "hi": 0.1351
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "consensus",
+   "n": 53,
+   "n_lesions": 52,
+   "metric": "defer_rate",
+   "point": 0.4151,
+   "lo": 0.3188,
+   "hi": 0.5139
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "consensus",
+   "n": 53,
+   "n_lesions": 52,
+   "metric": "refer_rate",
+   "point": 0.283,
+   "lo": 0.1805,
+   "hi": 0.394
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "consensus",
+   "n": 53,
+   "n_lesions": 52,
+   "metric": "mel_flag_rate",
+   "point": 0.2767,
+   "lo": 0.1778,
+   "hi": 0.381
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "consensus",
+   "n": 53,
+   "n_lesions": 52,
+   "metric": "aps_set_size",
+   "point": 1.4969,
+   "lo": 1.2807,
+   "hi": 1.7302
+  },
+  {
+   "dx": "bkl",
+   "dx_type": "consensus",
+   "n": 53,
+   "n_lesions": 52,
+   "metric": "aps_coverage",
+   "point": 0.8616,
+   "lo": 0.7799,
+   "hi": 0.9402
+  }
+ ]
+}

@@ -1,13 +1,15 @@
 import json
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from scipy.special import softmax
 
+from .calibration import CALIBRATION_METRICS, bin_stats, calibration_metrics, ece, fit_temperature, nll
 from .config import CLASSES, Paths
 from .stats import ci, cluster_bootstrap, recall_per_class
 
 MEL = CLASSES.index("mel")
+TREAT = np.isin(np.arange(len(CLASSES)), [CLASSES.index(c) for c in ("mel", "bcc", "akiec")])
 METRICS = ["acc", "bal_acc"] + list(CLASSES)
 
 
@@ -23,15 +25,24 @@ def load_runs(paths: Paths, prefix: str) -> dict[int, np.ndarray]:
     return runs
 
 
+def load_test(paths: Paths):
+    meta = pd.read_parquet(paths.meta)
+    split = pd.read_parquet(paths.results / "splits" / "audit.parquet")
+    return meta, split, split.test.values
+
+
 def metric_vector(pred: np.ndarray, y: np.ndarray) -> np.ndarray:
     rec = recall_per_class(pred, y)
     return np.concatenate([[(pred == y).mean(), np.nanmean(rec)], rec])
 
 
+def interval_row(samples: np.ndarray, point: float, per_seed: np.ndarray, **keys) -> dict:
+    lo, hi = ci(samples)
+    return {**keys, "point": point, "lo": lo, "hi": hi, "seed_min": per_seed.min(), "seed_max": per_seed.max()}
+
+
 def audit(paths: Paths, n_boot: int = 1000) -> dict:
-    meta = pd.read_parquet(paths.meta)
-    split = pd.read_parquet(paths.results / "splits" / "audit.parquet")
-    test = split.test.values
+    meta, split, test = load_test(paths)
     y = meta.label.values[test]
     lesion = meta.lesion_id.values[test]
     leaked = split.sibling_in_leaky_train.values[test]
@@ -54,8 +65,6 @@ def audit(paths: Paths, n_boot: int = 1000) -> dict:
 
     point = stat(np.arange(len(y)))
     boot = cluster_bootstrap(stat, lesion, n_boot=n_boot)
-    lo, hi = ci(boot)
-    dlo, dhi = ci(boot[:, :, 1] - boot[:, :, 0])
     per_seed = np.array([[[metric_vector(pred[c][k][m], y[m]) for c in conds] for m in subsets.values()]
                          for k in range(len(seeds))])
 
@@ -63,12 +72,10 @@ def audit(paths: Paths, n_boot: int = 1000) -> dict:
     for i, name in enumerate(subsets):
         for k, metric in enumerate(METRICS):
             for j, c in enumerate(conds):
-                rows.append({"subset": name, "cond": c, "metric": metric, "point": point[i, j, k],
-                             "lo": lo[i, j, k], "hi": hi[i, j, k],
-                             "seed_min": per_seed[:, i, j, k].min(), "seed_max": per_seed[:, i, j, k].max()})
-            d = per_seed[:, i, 1, k] - per_seed[:, i, 0, k]
-            rows.append({"subset": name, "cond": "delta", "metric": metric, "point": point[i, 1, k] - point[i, 0, k],
-                         "lo": dlo[i, k], "hi": dhi[i, k], "seed_min": d.min(), "seed_max": d.max()})
+                rows.append(interval_row(boot[:, i, j, k], point[i, j, k], per_seed[:, i, j, k],
+                                         subset=name, cond=c, metric=metric))
+            rows.append(interval_row(boot[:, i, 1, k] - boot[:, i, 0, k], point[i, 1, k] - point[i, 0, k],
+                                     per_seed[:, i, 1, k] - per_seed[:, i, 0, k], subset=name, cond="delta", metric=metric))
     table = pd.DataFrame(rows)
 
     # the clinical unit is the lesion; average logits over a lesion's test images and
@@ -90,7 +97,7 @@ def audit(paths: Paths, n_boot: int = 1000) -> dict:
 
     def pick(subset, cond, metric):
         r = table.query("subset == @subset and cond == @cond and metric == @metric").iloc[0]
-        return {"point": r.point, "lo": r.lo, "hi": r.hi, "seed_min": r.seed_min, "seed_max": r.seed_max}
+        return {k: r[k] for k in ("point", "lo", "hi", "seed_min", "seed_max")}
 
     out = {
         "seeds": seeds, "n_boot": n_boot,
@@ -107,6 +114,147 @@ def audit(paths: Paths, n_boot: int = 1000) -> dict:
         "per_lesion": per_lesion,
         "table": table.round(4).to_dict(orient="records"),
     }
+    h = out["headline"]
+    print(f"leak rate {out['leak_rate']:.1%} (mel {out['leak_rate_mel']:.1%}), seeds {seeds}")
+    for k in ("bal_acc", "mel_recall"):
+        d = h[k]["delta"]
+        print(f"{k:10s} clean {h[k]['clean']['point']:.3f}  leaky {h[k]['leaky']['point']:.3f}  "
+              f"delta {d['point']:+.3f} [{d['lo']:+.3f}, {d['hi']:+.3f}]  seeds [{d['seed_min']:+.3f}, {d['seed_max']:+.3f}]")
+    for sub in ("leaked", "unleaked"):
+        d = h[f"{sub}_delta"]
+        print(f"{sub:10s} delta bal_acc {d['bal_acc']['point']:+.3f} [{d['bal_acc']['lo']:+.3f}, {d['bal_acc']['hi']:+.3f}]  "
+              f"mel {d['mel']['point']:+.3f} [{d['mel']['lo']:+.3f}, {d['mel']['hi']:+.3f}]")
+    print("per lesion  " + "  ".join(f"{c}: bal {v['bal_acc']:.3f} mel {v['mel']:.3f}" for c, v in per_lesion.items()))
+    n = naive_out
+    print(f"naive 80/20 image split: bal {n['bal_acc']['point']:.3f} [{n['bal_acc']['lo']:.3f}, {n['bal_acc']['hi']:.3f}]  mel {n['mel']['point']:.3f}")
+    return out
+
+
+def imbalance(paths: Paths, n_boot: int = 1000) -> dict:
+    meta, split, test = load_test(paths)
+    cal = split.cal.values
+    y, y_cal = meta.label.values[test], meta.label.values[cal]
+    lesion = meta.lesion_id.values[test]
+    train_labels = meta.label.values[split.clean_train.values]
+    log_prior = np.log(np.bincount(train_labels, minlength=len(CLASSES)) / len(train_labels))
+
+    ce, cb = load_runs(paths, "clean"), load_runs(paths, "cb")
+    seeds = sorted(set(ce) & set(cb))
+    # Menon et al. 2021: subtracting the log training prior from CE logits is the
+    # Bayes-optimal classifier for balanced error, at zero training cost. It should
+    # buy what the class-balanced loss buys in argmax terms, without retraining.
+    variants = {
+        "ce": [ce[s] for s in seeds],
+        "ce_logit_adjusted": [ce[s] - log_prior for s in seeds],
+        "cb": [cb[s] for s in seeds],
+    }
+    pred = {v: np.stack([z[test].argmax(1) for z in zs]) for v, zs in variants.items()}
+    # calibration comparisons are only fair after temperature scaling, fitted per variant
+    temps = {v: [fit_temperature(z[cal], y_cal) for z in zs] for v, zs in variants.items()}
+    nll_raw = {v: np.stack([nll(z[test], y) for z in zs]) for v, zs in variants.items()}
+    nll_ts = {v: np.stack([nll(z[test], y, t) for z, t in zip(zs, temps[v])]) for v, zs in variants.items()}
+    metrics = METRICS + ["nll_raw", "nll_ts"]
+
+    def stat(idx):
+        out = np.empty((len(variants), len(metrics)))
+        for j, v in enumerate(variants):
+            out[j, :-2] = np.mean([metric_vector(p[idx], y[idx]) for p in pred[v]], axis=0)
+            out[j, -2] = nll_raw[v][:, idx].mean()
+            out[j, -1] = nll_ts[v][:, idx].mean()
+        return out
+
+    point = stat(np.arange(len(y)))
+    boot = cluster_bootstrap(stat, lesion, n_boot=n_boot)
+    per_seed = np.array([[np.concatenate([metric_vector(pred[v][k], y), [nll_raw[v][k].mean(), nll_ts[v][k].mean()]])
+                          for v in variants] for k in range(len(seeds))])
+
+    rows = []
+    for j, v in enumerate(variants):
+        for k, metric in enumerate(metrics):
+            rows.append(interval_row(boot[:, j, k], point[j, k], per_seed[:, j, k], variant=v, metric=metric, kind="value"))
+            if j:
+                rows.append(interval_row(boot[:, j, k] - boot[:, 0, k], point[j, k] - point[0, k],
+                                         per_seed[:, j, k] - per_seed[:, 0, k], variant=v, metric=metric, kind="delta_vs_ce"))
+    table = pd.DataFrame(rows)
+    out = {"seeds": seeds, "n_boot": n_boot, "log_prior": dict(zip(CLASSES, log_prior.round(4).tolist())),
+           "temperatures": {v: [round(t, 4) for t in ts] for v, ts in temps.items()},
+           "table": table.round(4).to_dict(orient="records")}
+    for metric in ("bal_acc", "mel", "nv", "nll_raw", "nll_ts"):
+        line = f"{metric:8s}"
+        for v in variants:
+            r = table.query("variant == @v and metric == @metric and kind == 'value'").iloc[0]
+            line += f"  {v} {r.point:.3f} [{r.lo:.3f}, {r.hi:.3f}]"
+        print(line)
+    return out
+
+
+def calibration(paths: Paths, n_boot: int = 1000) -> dict:
+    meta, split, test = load_test(paths)
+    cal = split.cal.values
+    y, y_cal = meta.label.values[test], meta.label.values[cal]
+    lesion = meta.lesion_id.values[test]
+    treat = TREAT[y]
+
+    ce = load_runs(paths, "clean")
+    seeds = sorted(ce)
+    temps = {s: fit_temperature(ce[s][cal], y_cal) for s in seeds}
+    stages = {"pre": {s: 1.0 for s in seeds}, "post": temps}
+    metrics = CALIBRATION_METRICS + ["ece_treat_adaptive"]
+
+    def p_treat(z, t):
+        return softmax(z / t, axis=1)[:, TREAT].sum(axis=1)
+
+    def stat(idx):
+        out = np.empty((2, len(metrics)))
+        for i, ts in enumerate(stages.values()):
+            vals = []
+            for s in seeds:
+                z = ce[s][test][idx]
+                # the discharge decision later thresholds p(needs treatment) at a few percent,
+                # a region top-label ECE cannot see, so calibrate that probability too
+                vals.append(np.append(calibration_metrics(z, y[idx], ts[s]),
+                                      ece(p_treat(z, ts[s]), treat[idx], n_bins=10, adaptive=True)))
+            out[i] = np.mean(vals, axis=0)
+        return out
+
+    point = stat(np.arange(len(y)))
+    # ECE is biased upward on a resample (duplicated points make the bins lumpier), so
+    # its percentile interval sits high relative to the point estimate; the pre/post
+    # delta cancels most of it, and NLL and Brier are plain means with no such issue
+    boot = cluster_bootstrap(stat, lesion, n_boot=n_boot)
+    per_seed = np.array([[np.append(calibration_metrics(ce[s][test], y, ts[s]),
+                                    ece(p_treat(ce[s][test], ts[s]), treat, n_bins=10, adaptive=True))
+                          for ts in stages.values()] for s in seeds])
+
+    rows = []
+    for k, metric in enumerate(metrics):
+        for i, stage in enumerate(stages):
+            rows.append(interval_row(boot[:, i, k], point[i, k], per_seed[:, i, k], stage=stage, metric=metric))
+        rows.append(interval_row(boot[:, 1, k] - boot[:, 0, k], point[1, k] - point[0, k],
+                                 per_seed[:, 1, k] - per_seed[:, 0, k], stage="delta", metric=metric))
+    table = pd.DataFrame(rows)
+
+    # reliability bins pooled over seeds, for the figures
+    def bins(conf, hit, **kw):
+        b = bin_stats(conf, hit, **kw)
+        return {k: [None if isinstance(x, float) and np.isnan(x) else float(x) for x in v] for k, v in b.items()}
+
+    reliability = {"top_label": {}, "treat": {}}
+    for stage, ts in stages.items():
+        probs = np.concatenate([softmax(ce[s][test] / ts[s], axis=1) for s in seeds])
+        yy = np.tile(y, len(seeds))
+        reliability["top_label"][stage] = bins(probs.max(1), probs.argmax(1) == yy)
+        reliability["treat"][stage] = bins(probs[:, TREAT].sum(1), TREAT[yy], n_bins=10, adaptive=True)
+
+    out = {"seeds": seeds, "n_boot": n_boot, "n_cal": int(cal.sum()),
+           "temperatures": {s: round(t, 4) for s, t in temps.items()},
+           "table": table.round(4).to_dict(orient="records"), "reliability": reliability}
+    print("temperatures " + "  ".join(f"seed {s}: {t:.3f}" for s, t in temps.items()))
+    for metric in metrics:
+        r = {st: table.query("stage == @st and metric == @metric").iloc[0] for st in ("pre", "post", "delta")}
+        print(f"{metric:19s} pre {r['pre'].point:.4f} [{r['pre'].lo:.4f}, {r['pre'].hi:.4f}]  "
+              f"post {r['post'].point:.4f} [{r['post'].lo:.4f}, {r['post'].hi:.4f}]  "
+              f"delta {r['delta'].point:+.4f} [{r['delta'].lo:+.4f}, {r['delta'].hi:+.4f}]")
     return out
 
 
@@ -118,18 +266,6 @@ def dump(paths: Paths, name: str, obj: dict) -> None:
 
 if __name__ == "__main__":
     paths = Paths()
-    a = audit(paths)
-    dump(paths, "audit", a)
-    h = a["headline"]
-    print(f"leak rate {a['leak_rate']:.1%} (mel {a['leak_rate_mel']:.1%}), seeds {a['seeds']}")
-    for k in ("bal_acc", "mel_recall"):
-        d = h[k]["delta"]
-        print(f"{k:10s} clean {h[k]['clean']['point']:.3f}  leaky {h[k]['leaky']['point']:.3f}  "
-              f"delta {d['point']:+.3f} [{d['lo']:+.3f}, {d['hi']:+.3f}]  seeds [{d['seed_min']:+.3f}, {d['seed_max']:+.3f}]")
-    for sub in ("leaked", "unleaked"):
-        d = h[f"{sub}_delta"]
-        print(f"{sub:10s} delta bal_acc {d['bal_acc']['point']:+.3f} [{d['bal_acc']['lo']:+.3f}, {d['bal_acc']['hi']:+.3f}]  "
-              f"mel {d['mel']['point']:+.3f} [{d['mel']['lo']:+.3f}, {d['mel']['hi']:+.3f}]")
-    print("per lesion  " + "  ".join(f"{c}: bal {v['bal_acc']:.3f} mel {v['mel']:.3f}" for c, v in a["per_lesion"].items()))
-    n = a["naive_image_split"]
-    print(f"naive 80/20 image split: bal {n['bal_acc']['point']:.3f} [{n['bal_acc']['lo']:.3f}, {n['bal_acc']['hi']:.3f}]  mel {n['mel']['point']:.3f}")
+    for name, section in (("audit", audit), ("imbalance", imbalance), ("calibration", calibration)):
+        print(f"--- {name} ---")
+        dump(paths, name, section(paths))

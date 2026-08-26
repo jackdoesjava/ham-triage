@@ -28,3 +28,18 @@ class Paths:
 
 
 CACHE_SIZE = 256  # cached square side; train crops 224 out of this, eval centre-crops
+
+
+@dataclass(frozen=True)
+class TrainConfig:
+    model: str = "efficientnet_b0"
+    epochs: int = 15
+    batch_size: int = 32
+    lr: float = 3e-4
+    weight_decay: float = 0.01
+    warmup_epochs: int = 1
+    crop: int = 224
+    drop_rate: float = 0.2  # the timm B0 recipe
+    drop_path_rate: float = 0.1
+    amp: bool = True  # buys memory, not speed: Pascal has no tensor cores
+    loss: str = "ce"

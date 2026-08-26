@@ -1,0 +1,3623 @@
+{
+ "cost_model": {
+  "miss_mel": 100.0,
+  "miss_treat": 10.0,
+  "refer": 1.0,
+  "defer": 0.3,
+  "reader_sensitivity": 0.87
+ },
+ "target_defer": 0.2,
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "n_boot": 1000,
+ "temperatures": [
+  1.9818,
+  2.0215,
+  2.0504
+ ],
+ "operating_point": [
+  {
+   "policy": "bayes",
+   "metric": "cost",
+   "kind": "value",
+   "point": 0.7205,
+   "lo": 0.5962,
+   "hi": 0.867,
+   "seed_min": 0.6812,
+   "seed_max": 0.7441
+  },
+  {
+   "policy": "bayes",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 0.535,
+   "lo": 0.5163,
+   "hi": 0.5544,
+   "seed_min": 0.5195,
+   "seed_max": 0.554
+  },
+  {
+   "policy": "bayes",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.2237,
+   "lo": 0.2089,
+   "hi": 0.2377,
+   "seed_min": 0.2072,
+   "seed_max": 0.2322
+  },
+  {
+   "policy": "bayes",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.3861,
+   "lo": 0.3668,
+   "hi": 0.4074,
+   "seed_min": 0.3684,
+   "seed_max": 0.4134
+  },
+  {
+   "policy": "bayes",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0229,
+   "lo": 0.0125,
+   "hi": 0.035,
+   "seed_min": 0.0195,
+   "seed_max": 0.0264
+  },
+  {
+   "policy": "bayes",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.5135,
+   "lo": 0.488,
+   "hi": 0.5366,
+   "seed_min": 0.5012,
+   "seed_max": 0.5269
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "cost",
+   "kind": "value",
+   "point": 0.7283,
+   "lo": 0.6021,
+   "hi": 0.8746,
+   "seed_min": 0.6812,
+   "seed_max": 0.7548
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.0077,
+   "lo": 0.0007,
+   "hi": 0.016,
+   "seed_min": 0.0,
+   "seed_max": 0.0185
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 0.5348,
+   "lo": 0.5161,
+   "hi": 0.5542,
+   "seed_min": 0.5193,
+   "seed_max": 0.5535
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": -0.0002,
+   "lo": -0.0003,
+   "hi": -0.0002,
+   "seed_min": -0.0004,
+   "seed_max": 0.0
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.2345,
+   "lo": 0.2193,
+   "hi": 0.2488,
+   "seed_min": 0.2247,
+   "seed_max": 0.2466
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0108,
+   "lo": 0.0084,
+   "hi": 0.0133,
+   "seed_min": 0.0,
+   "seed_max": 0.0175
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.3813,
+   "lo": 0.3625,
+   "hi": 0.4024,
+   "seed_min": 0.3615,
+   "seed_max": 0.4059
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.0048,
+   "lo": -0.0067,
+   "hi": -0.0031,
+   "seed_min": -0.0075,
+   "seed_max": 0.0
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0237,
+   "lo": 0.0134,
+   "hi": 0.0357,
+   "seed_min": 0.0195,
+   "seed_max": 0.027
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0008,
+   "lo": 0.0002,
+   "hi": 0.0016,
+   "seed_min": 0.0,
+   "seed_max": 0.0018
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.521,
+   "lo": 0.4955,
+   "hi": 0.5438,
+   "seed_min": 0.5112,
+   "seed_max": 0.5394
+  },
+  {
+   "policy": "bayes_cost_optimal",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0075,
+   "lo": 0.005,
+   "hi": 0.0099,
+   "seed_min": 0.0,
+   "seed_max": 0.0125
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "cost",
+   "kind": "value",
+   "point": 1.0122,
+   "lo": 0.7873,
+   "hi": 1.2473,
+   "seed_min": 0.9774,
+   "seed_max": 1.0506
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.2916,
+   "lo": 0.1563,
+   "hi": 0.4521,
+   "seed_min": 0.2722,
+   "seed_max": 0.3064
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 0.3787,
+   "lo": 0.3614,
+   "hi": 0.3986,
+   "seed_min": 0.3599,
+   "seed_max": 0.3951
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": -0.1563,
+   "lo": -0.1635,
+   "hi": -0.1482,
+   "seed_min": -0.1596,
+   "seed_max": -0.1504
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.2609,
+   "lo": 0.2434,
+   "hi": 0.276,
+   "seed_min": 0.2576,
+   "seed_max": 0.2646
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0373,
+   "lo": 0.0224,
+   "hi": 0.0519,
+   "seed_min": 0.026,
+   "seed_max": 0.0534
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.253,
+   "lo": 0.235,
+   "hi": 0.2726,
+   "seed_min": 0.2356,
+   "seed_max": 0.2676
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.1331,
+   "lo": -0.1445,
+   "hi": -0.1225,
+   "seed_min": -0.1458,
+   "seed_max": -0.1208
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0585,
+   "lo": 0.0401,
+   "hi": 0.0774,
+   "seed_min": 0.055,
+   "seed_max": 0.0632
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0355,
+   "lo": 0.0245,
+   "hi": 0.0482,
+   "seed_min": 0.0344,
+   "seed_max": 0.0368
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.3971,
+   "lo": 0.3734,
+   "hi": 0.4186,
+   "seed_min": 0.3719,
+   "seed_max": 0.4144
+  },
+  {
+   "policy": "bayes_raw_posteriors",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.1165,
+   "lo": -0.1275,
+   "hi": -0.1057,
+   "seed_min": -0.1294,
+   "seed_max": -0.1075
+  },
+  {
+   "policy": "msp",
+   "metric": "cost",
+   "kind": "value",
+   "point": 1.5109,
+   "lo": 1.2802,
+   "hi": 1.7211,
+   "seed_min": 1.4237,
+   "seed_max": 1.5699
+  },
+  {
+   "policy": "msp",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.7903,
+   "lo": 0.6335,
+   "hi": 0.9562,
+   "seed_min": 0.6796,
+   "seed_max": 0.8578
+  },
+  {
+   "policy": "msp",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 1.372,
+   "lo": 1.2902,
+   "hi": 1.4575,
+   "seed_min": 1.2839,
+   "seed_max": 1.4948
+  },
+  {
+   "policy": "msp",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.8371,
+   "lo": 0.7642,
+   "hi": 0.9114,
+   "seed_min": 0.7644,
+   "seed_max": 0.9409
+  },
+  {
+   "policy": "msp",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.2952,
+   "lo": 0.2769,
+   "hi": 0.3119,
+   "seed_min": 0.2836,
+   "seed_max": 0.3145
+  },
+  {
+   "policy": "msp",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0716,
+   "lo": 0.047,
+   "hi": 0.0957,
+   "seed_min": 0.0514,
+   "seed_max": 0.1073
+  },
+  {
+   "policy": "msp",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.2533,
+   "lo": 0.2372,
+   "hi": 0.2692,
+   "seed_min": 0.2446,
+   "seed_max": 0.2636
+  },
+  {
+   "policy": "msp",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.1328,
+   "lo": -0.1545,
+   "hi": -0.1113,
+   "seed_min": -0.1687,
+   "seed_max": -0.1128
+  },
+  {
+   "policy": "msp",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0993,
+   "lo": 0.0854,
+   "hi": 0.1134,
+   "seed_min": 0.091,
+   "seed_max": 0.1055
+  },
+  {
+   "policy": "msp",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0764,
+   "lo": 0.0665,
+   "hi": 0.0874,
+   "seed_min": 0.0646,
+   "seed_max": 0.0826
+  },
+  {
+   "policy": "msp",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.4392,
+   "lo": 0.4159,
+   "hi": 0.4611,
+   "seed_min": 0.4275,
+   "seed_max": 0.4519
+  },
+  {
+   "policy": "msp",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.0744,
+   "lo": -0.083,
+   "hi": -0.0659,
+   "seed_min": -0.075,
+   "seed_max": -0.0737
+  },
+  {
+   "policy": "entropy",
+   "metric": "cost",
+   "kind": "value",
+   "point": 1.5096,
+   "lo": 1.2821,
+   "hi": 1.7208,
+   "seed_min": 1.4367,
+   "seed_max": 1.5649
+  },
+  {
+   "policy": "entropy",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.7891,
+   "lo": 0.6285,
+   "hi": 0.9534,
+   "seed_min": 0.6926,
+   "seed_max": 0.8461
+  },
+  {
+   "policy": "entropy",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 1.3512,
+   "lo": 1.2686,
+   "hi": 1.4346,
+   "seed_min": 1.2749,
+   "seed_max": 1.4674
+  },
+  {
+   "policy": "entropy",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.8163,
+   "lo": 0.7453,
+   "hi": 0.8864,
+   "seed_min": 0.7553,
+   "seed_max": 0.9134
+  },
+  {
+   "policy": "entropy",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.2949,
+   "lo": 0.2764,
+   "hi": 0.3117,
+   "seed_min": 0.2851,
+   "seed_max": 0.3135
+  },
+  {
+   "policy": "entropy",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0712,
+   "lo": 0.0461,
+   "hi": 0.0958,
+   "seed_min": 0.0529,
+   "seed_max": 0.1063
+  },
+  {
+   "policy": "entropy",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.252,
+   "lo": 0.2362,
+   "hi": 0.2675,
+   "seed_min": 0.2451,
+   "seed_max": 0.2606
+  },
+  {
+   "policy": "entropy",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.1341,
+   "lo": -0.1553,
+   "hi": -0.112,
+   "seed_min": -0.1682,
+   "seed_max": -0.1158
+  },
+  {
+   "policy": "entropy",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0991,
+   "lo": 0.0852,
+   "hi": 0.1134,
+   "seed_min": 0.0922,
+   "seed_max": 0.1049
+  },
+  {
+   "policy": "entropy",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0762,
+   "lo": 0.0659,
+   "hi": 0.0873,
+   "seed_min": 0.0658,
+   "seed_max": 0.082
+  },
+  {
+   "policy": "entropy",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.4371,
+   "lo": 0.4139,
+   "hi": 0.4595,
+   "seed_min": 0.4238,
+   "seed_max": 0.4512
+  },
+  {
+   "policy": "entropy",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.0765,
+   "lo": -0.085,
+   "hi": -0.0678,
+   "seed_min": -0.0775,
+   "seed_max": -0.0756
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "cost",
+   "kind": "value",
+   "point": 1.3286,
+   "lo": 1.1303,
+   "hi": 1.5409,
+   "seed_min": 1.2597,
+   "seed_max": 1.368
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.608,
+   "lo": 0.4649,
+   "hi": 0.771,
+   "seed_min": 0.5155,
+   "seed_max": 0.6768
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 1.211,
+   "lo": 1.1312,
+   "hi": 1.2942,
+   "seed_min": 1.1381,
+   "seed_max": 1.2928
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.676,
+   "lo": 0.6042,
+   "hi": 0.7482,
+   "seed_min": 0.6186,
+   "seed_max": 0.7389
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.2896,
+   "lo": 0.2701,
+   "hi": 0.3081,
+   "seed_min": 0.2896,
+   "seed_max": 0.2896
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0659,
+   "lo": 0.0424,
+   "hi": 0.0901,
+   "seed_min": 0.0574,
+   "seed_max": 0.0824
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.2792,
+   "lo": 0.2607,
+   "hi": 0.2978,
+   "seed_min": 0.2736,
+   "seed_max": 0.2871
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.1068,
+   "lo": -0.129,
+   "hi": -0.0859,
+   "seed_min": -0.1263,
+   "seed_max": -0.0949
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0804,
+   "lo": 0.0657,
+   "hi": 0.095,
+   "seed_min": 0.0744,
+   "seed_max": 0.0834
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0575,
+   "lo": 0.046,
+   "hi": 0.0698,
+   "seed_min": 0.048,
+   "seed_max": 0.0639
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.4631,
+   "lo": 0.4391,
+   "hi": 0.4863,
+   "seed_min": 0.4556,
+   "seed_max": 0.4731
+  },
+  {
+   "policy": "ensemble_mi",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.0504,
+   "lo": -0.0603,
+   "hi": -0.0405,
+   "seed_min": -0.0537,
+   "seed_max": -0.0456
+  },
+  {
+   "policy": "random",
+   "metric": "cost",
+   "kind": "value",
+   "point": 1.0809,
+   "lo": 0.9136,
+   "hi": 1.2534,
+   "seed_min": 1.0617,
+   "seed_max": 1.1101
+  },
+  {
+   "policy": "random",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.3604,
+   "lo": 0.2608,
+   "hi": 0.476,
+   "seed_min": 0.3176,
+   "seed_max": 0.3897
+  },
+  {
+   "policy": "random",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 0.8703,
+   "lo": 0.8215,
+   "hi": 0.9195,
+   "seed_min": 0.8191,
+   "seed_max": 0.9275
+  },
+  {
+   "policy": "random",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.3353,
+   "lo": 0.2963,
+   "hi": 0.3747,
+   "seed_min": 0.2876,
+   "seed_max": 0.3736
+  },
+  {
+   "policy": "random",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.204,
+   "lo": 0.1943,
+   "hi": 0.2144,
+   "seed_min": 0.1922,
+   "seed_max": 0.2132
+  },
+  {
+   "policy": "random",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.0196,
+   "lo": -0.0368,
+   "hi": -0.0012,
+   "seed_min": -0.0399,
+   "seed_max": 0.006
+  },
+  {
+   "policy": "random",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.4274,
+   "lo": 0.4087,
+   "hi": 0.4438,
+   "seed_min": 0.4219,
+   "seed_max": 0.4368
+  },
+  {
+   "policy": "random",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0413,
+   "lo": 0.0277,
+   "hi": 0.0539,
+   "seed_min": 0.01,
+   "seed_max": 0.0604
+  },
+  {
+   "policy": "random",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0508,
+   "lo": 0.0382,
+   "hi": 0.0634,
+   "seed_min": 0.0489,
+   "seed_max": 0.0536
+  },
+  {
+   "policy": "random",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0279,
+   "lo": 0.0198,
+   "hi": 0.0372,
+   "seed_min": 0.0236,
+   "seed_max": 0.0307
+  },
+  {
+   "policy": "random",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.5423,
+   "lo": 0.5207,
+   "hi": 0.5613,
+   "seed_min": 0.5387,
+   "seed_max": 0.5481
+  },
+  {
+   "policy": "random",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0287,
+   "lo": 0.0145,
+   "hi": 0.0418,
+   "seed_min": 0.0212,
+   "seed_max": 0.0375
+  },
+  {
+   "policy": "always_predict",
+   "metric": "cost",
+   "kind": "value",
+   "point": 0.8294,
+   "lo": 0.669,
+   "hi": 0.9994,
+   "seed_min": 0.7908,
+   "seed_max": 0.8502
+  },
+  {
+   "policy": "always_predict",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.1089,
+   "lo": 0.0199,
+   "hi": 0.2176,
+   "seed_min": 0.0467,
+   "seed_max": 0.1661
+  },
+  {
+   "policy": "always_predict",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 0.6074,
+   "lo": 0.5872,
+   "hi": 0.6269,
+   "seed_min": 0.5959,
+   "seed_max": 0.62
+  },
+  {
+   "policy": "always_predict",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.0724,
+   "lo": 0.0671,
+   "hi": 0.0776,
+   "seed_min": 0.0661,
+   "seed_max": 0.0763
+  },
+  {
+   "policy": "always_predict",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "seed_min": 0.0,
+   "seed_max": 0.0
+  },
+  {
+   "policy": "always_predict",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.2237,
+   "lo": -0.2377,
+   "hi": -0.2089,
+   "seed_min": -0.2322,
+   "seed_max": -0.2072
+  },
+  {
+   "policy": "always_predict",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.5399,
+   "lo": 0.5183,
+   "hi": 0.5601,
+   "seed_min": 0.5312,
+   "seed_max": 0.5507
+  },
+  {
+   "policy": "always_predict",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.1538,
+   "lo": 0.1407,
+   "hi": 0.165,
+   "seed_min": 0.1373,
+   "seed_max": 0.1628
+  },
+  {
+   "policy": "always_predict",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0255,
+   "lo": 0.0118,
+   "hi": 0.0405,
+   "seed_min": 0.0225,
+   "seed_max": 0.027
+  },
+  {
+   "policy": "always_predict",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0026,
+   "lo": -0.0055,
+   "hi": 0.012,
+   "seed_min": -0.0039,
+   "seed_max": 0.0075
+  },
+  {
+   "policy": "always_predict",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.4283,
+   "lo": 0.405,
+   "hi": 0.4505,
+   "seed_min": 0.4175,
+   "seed_max": 0.4412
+  },
+  {
+   "policy": "always_predict",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.0852,
+   "lo": -0.0942,
+   "hi": -0.076,
+   "seed_min": -0.0862,
+   "seed_max": -0.0837
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "cost",
+   "kind": "value",
+   "point": 4.8897,
+   "lo": 3.9836,
+   "hi": 5.8202,
+   "seed_min": 4.6495,
+   "seed_max": 5.2766
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 4.1691,
+   "lo": 3.3345,
+   "hi": 5.0362,
+   "seed_min": 3.9132,
+   "seed_max": 4.5325
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 4.1243,
+   "lo": 3.8292,
+   "hi": 4.4586,
+   "seed_min": 3.8629,
+   "seed_max": 4.4004
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": 3.5893,
+   "lo": 3.3056,
+   "hi": 3.9111,
+   "seed_min": 3.3434,
+   "seed_max": 3.8464
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "seed_min": 0.0,
+   "seed_max": 0.0
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.2237,
+   "lo": -0.2377,
+   "hi": -0.2089,
+   "seed_min": -0.2322,
+   "seed_max": -0.2072
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.1884,
+   "lo": 0.1723,
+   "hi": 0.2061,
+   "seed_min": 0.1792,
+   "seed_max": 0.1962
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.1977,
+   "lo": -0.213,
+   "hi": -0.1823,
+   "seed_min": -0.2172,
+   "seed_max": -0.1867
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.4084,
+   "lo": 0.3485,
+   "hi": 0.4657,
+   "seed_min": 0.3874,
+   "seed_max": 0.4414
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.3855,
+   "lo": 0.3292,
+   "hi": 0.4411,
+   "seed_min": 0.3645,
+   "seed_max": 0.415
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.0625,
+   "lo": 0.0527,
+   "hi": 0.073,
+   "seed_min": 0.0594,
+   "seed_max": 0.0675
+  },
+  {
+   "policy": "argmax_7class",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.451,
+   "lo": -0.4727,
+   "hi": -0.4269,
+   "seed_min": -0.4594,
+   "seed_max": -0.4419
+  },
+  {
+   "policy": "refer_all",
+   "metric": "cost",
+   "kind": "value",
+   "point": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "seed_min": 1.0,
+   "seed_max": 1.0
+  },
+  {
+   "policy": "refer_all",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.2795,
+   "lo": 0.133,
+   "hi": 0.4038,
+   "seed_min": 0.2559,
+   "seed_max": 0.3188
+  },
+  {
+   "policy": "refer_all",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "seed_min": 1.0,
+   "seed_max": 1.0
+  },
+  {
+   "policy": "refer_all",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.465,
+   "lo": 0.4456,
+   "hi": 0.4837,
+   "seed_min": 0.446,
+   "seed_max": 0.4805
+  },
+  {
+   "policy": "refer_all",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "seed_min": 0.0,
+   "seed_max": 0.0
+  },
+  {
+   "policy": "refer_all",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.2237,
+   "lo": -0.2377,
+   "hi": -0.2089,
+   "seed_min": -0.2322,
+   "seed_max": -0.2072
+  },
+  {
+   "policy": "refer_all",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "seed_min": 1.0,
+   "seed_max": 1.0
+  },
+  {
+   "policy": "refer_all",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.6139,
+   "lo": 0.5926,
+   "hi": 0.6332,
+   "seed_min": 0.5866,
+   "seed_max": 0.6316
+  },
+  {
+   "policy": "refer_all",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "seed_min": 0.0,
+   "seed_max": 0.0
+  },
+  {
+   "policy": "refer_all",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.0229,
+   "lo": -0.035,
+   "hi": -0.0125,
+   "seed_min": -0.0264,
+   "seed_max": -0.0195
+  },
+  {
+   "policy": "refer_all",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "seed_min": 1.0,
+   "seed_max": 1.0
+  },
+  {
+   "policy": "refer_all",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.4865,
+   "lo": 0.4634,
+   "hi": 0.512,
+   "seed_min": 0.4731,
+   "seed_max": 0.4988
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "cost",
+   "kind": "value",
+   "point": 11.987,
+   "lo": 10.4642,
+   "hi": 13.4022,
+   "seed_min": 11.987,
+   "seed_max": 11.987
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 11.2665,
+   "lo": 9.782,
+   "hi": 12.6506,
+   "seed_min": 11.2429,
+   "seed_max": 11.3058
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 12.1841,
+   "lo": 11.2702,
+   "hi": 13.1812,
+   "seed_min": 11.5287,
+   "seed_max": 12.9264
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": 11.6492,
+   "lo": 10.7334,
+   "hi": 12.636,
+   "seed_min": 11.0092,
+   "seed_max": 12.3724
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "seed_min": 0.0,
+   "seed_max": 0.0
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.2237,
+   "lo": -0.2377,
+   "hi": -0.2089,
+   "seed_min": -0.2322,
+   "seed_max": -0.2072
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "seed_min": 0.0,
+   "seed_max": 0.0
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.3861,
+   "lo": -0.4074,
+   "hi": -0.3668,
+   "seed_min": -0.4134,
+   "seed_max": -0.3684
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "seed_min": 1.0,
+   "seed_max": 1.0
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.9771,
+   "lo": 0.965,
+   "hi": 0.9875,
+   "seed_min": 0.9736,
+   "seed_max": 0.9805
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "seed_min": 0.0,
+   "seed_max": 0.0
+  },
+  {
+   "policy": "discharge_all",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.5135,
+   "lo": -0.5366,
+   "hi": -0.488,
+   "seed_min": -0.5269,
+   "seed_max": -0.5012
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "cost",
+   "kind": "value",
+   "point": 2.1599,
+   "lo": 1.7512,
+   "hi": 2.6014,
+   "seed_min": 2.0035,
+   "seed_max": 2.337
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "cost",
+   "kind": "delta_vs_bayes",
+   "point": 1.4394,
+   "lo": 1.1235,
+   "hi": 1.7961,
+   "seed_min": 1.2672,
+   "seed_max": 1.5929
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "expected_cost",
+   "kind": "value",
+   "point": 1.5274,
+   "lo": 1.4191,
+   "hi": 1.6409,
+   "seed_min": 1.4567,
+   "seed_max": 1.5895
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "expected_cost",
+   "kind": "delta_vs_bayes",
+   "point": 0.9924,
+   "lo": 0.8953,
+   "hi": 1.0982,
+   "seed_min": 0.9028,
+   "seed_max": 1.058
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "seed_min": 0.0,
+   "seed_max": 0.0
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "defer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.2237,
+   "lo": -0.2377,
+   "hi": -0.2089,
+   "seed_min": -0.2322,
+   "seed_max": -0.2072
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.306,
+   "lo": 0.2879,
+   "hi": 0.3246,
+   "seed_min": 0.2801,
+   "seed_max": 0.346
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "refer_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.08,
+   "lo": -0.0925,
+   "hi": -0.069,
+   "seed_min": -0.0884,
+   "seed_max": -0.0674
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.1066,
+   "lo": 0.0742,
+   "hi": 0.1421,
+   "seed_min": 0.0901,
+   "seed_max": 0.1261
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_bayes",
+   "point": 0.0837,
+   "lo": 0.0587,
+   "hi": 0.1109,
+   "seed_min": 0.0672,
+   "seed_max": 0.0997
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "benign_human_rate",
+   "kind": "value",
+   "point": 0.2302,
+   "lo": 0.2121,
+   "hi": 0.2484,
+   "seed_min": 0.1988,
+   "seed_max": 0.2762
+  },
+  {
+   "policy": "conformal_mel_0.1",
+   "metric": "benign_human_rate",
+   "kind": "delta_vs_bayes",
+   "point": -0.2833,
+   "lo": -0.2999,
+   "hi": -0.265,
+   "seed_min": -0.3025,
+   "seed_max": -0.2506
+  }
+ ],
+ "deferral_curves": {
+  "grid": [
+   0.0,
+   0.05,
+   0.1,
+   0.15,
+   0.2,
+   0.25,
+   0.3,
+   0.35,
+   0.4,
+   0.45,
+   0.5,
+   0.55,
+   0.6,
+   0.65,
+   0.7,
+   0.75,
+   0.8,
+   0.85,
+   0.9
+  ],
+  "columns": [
+   "cost",
+   "expected_cost",
+   "defer_rate",
+   "refer_rate",
+   "mel_miss_rate",
+   "benign_human_rate"
+  ],
+  "curves": {
+   "bayes": [
+    [
+     0.8294,
+     0.6074,
+     0.0,
+     0.5399,
+     0.0255,
+     0.4283
+    ],
+    [
+     0.7805,
+     0.5812,
+     0.0496,
+     0.4983,
+     0.0236,
+     0.4375
+    ],
+    [
+     0.7655,
+     0.5587,
+     0.1028,
+     0.4581,
+     0.0242,
+     0.4538
+    ],
+    [
+     0.7387,
+     0.5401,
+     0.1722,
+     0.4147,
+     0.0236,
+     0.4854
+    ],
+    [
+     0.7205,
+     0.535,
+     0.2237,
+     0.3861,
+     0.0229,
+     0.5135
+    ],
+    [
+     0.7089,
+     0.5368,
+     0.2741,
+     0.3668,
+     0.0221,
+     0.5519
+    ],
+    [
+     0.6836,
+     0.5455,
+     0.3308,
+     0.351,
+     0.0195,
+     0.6023
+    ],
+    [
+     0.6681,
+     0.5534,
+     0.3666,
+     0.3442,
+     0.0177,
+     0.6381
+    ],
+    [
+     0.6633,
+     0.5641,
+     0.4077,
+     0.34,
+     0.0164,
+     0.6842
+    ],
+    [
+     0.6764,
+     0.5741,
+     0.4432,
+     0.3375,
+     0.0168,
+     0.7254
+    ],
+    [
+     0.6926,
+     0.5867,
+     0.4864,
+     0.3362,
+     0.0172,
+     0.7779
+    ],
+    [
+     0.7025,
+     0.5968,
+     0.5206,
+     0.3358,
+     0.0172,
+     0.8202
+    ],
+    [
+     0.7138,
+     0.6081,
+     0.5582,
+     0.3358,
+     0.0172,
+     0.8673
+    ],
+    [
+     0.7249,
+     0.6192,
+     0.5953,
+     0.3358,
+     0.0172,
+     0.9138
+    ],
+    [
+     0.7253,
+     0.6196,
+     0.5964,
+     0.3358,
+     0.0172,
+     0.9152
+    ],
+    [
+     0.7253,
+     0.6196,
+     0.5964,
+     0.3358,
+     0.0172,
+     0.9152
+    ],
+    [
+     0.7253,
+     0.6196,
+     0.5964,
+     0.3358,
+     0.0172,
+     0.9152
+    ],
+    [
+     0.7253,
+     0.6196,
+     0.5964,
+     0.3358,
+     0.0172,
+     0.9152
+    ],
+    [
+     0.7253,
+     0.6196,
+     0.5964,
+     0.3358,
+     0.0172,
+     0.9152
+    ]
+   ],
+   "bayes_raw_posteriors": [
+    [
+     1.8933,
+     0.3937,
+     0.0,
+     0.3506,
+     0.1336,
+     0.2133
+    ],
+    [
+     1.8217,
+     0.3771,
+     0.0313,
+     0.324,
+     0.1286,
+     0.2177
+    ],
+    [
+     1.7775,
+     0.3646,
+     0.0612,
+     0.3027,
+     0.1256,
+     0.2273
+    ],
+    [
+     1.7417,
+     0.3564,
+     0.0925,
+     0.2836,
+     0.1235,
+     0.2408
+    ],
+    [
+     1.6388,
+     0.3536,
+     0.1203,
+     0.2719,
+     0.1153,
+     0.2581
+    ],
+    [
+     1.5001,
+     0.3548,
+     0.1501,
+     0.2636,
+     0.1034,
+     0.2815
+    ],
+    [
+     1.3204,
+     0.3606,
+     0.1882,
+     0.2574,
+     0.087,
+     0.3179
+    ],
+    [
+     1.2394,
+     0.3668,
+     0.2162,
+     0.2541,
+     0.0794,
+     0.3471
+    ],
+    [
+     1.0823,
+     0.3753,
+     0.2488,
+     0.2531,
+     0.065,
+     0.3833
+    ],
+    [
+     0.9707,
+     0.3846,
+     0.2817,
+     0.2528,
+     0.0545,
+     0.4217
+    ],
+    [
+     0.9067,
+     0.3948,
+     0.3167,
+     0.252,
+     0.048,
+     0.4631
+    ],
+    [
+     0.8734,
+     0.4049,
+     0.3505,
+     0.252,
+     0.0441,
+     0.5048
+    ],
+    [
+     0.8521,
+     0.4156,
+     0.3863,
+     0.2518,
+     0.0415,
+     0.5485
+    ],
+    [
+     0.779,
+     0.4293,
+     0.432,
+     0.2518,
+     0.0336,
+     0.6046
+    ],
+    [
+     0.7796,
+     0.4299,
+     0.434,
+     0.2518,
+     0.0336,
+     0.6071
+    ],
+    [
+     0.7796,
+     0.4299,
+     0.434,
+     0.2518,
+     0.0336,
+     0.6071
+    ],
+    [
+     0.7796,
+     0.4299,
+     0.434,
+     0.2518,
+     0.0336,
+     0.6071
+    ],
+    [
+     0.7796,
+     0.4299,
+     0.434,
+     0.2518,
+     0.0336,
+     0.6071
+    ],
+    [
+     0.7796,
+     0.4299,
+     0.434,
+     0.2518,
+     0.0336,
+     0.6071
+    ]
+   ],
+   "msp": [
+    [
+     0.8366,
+     0.6145,
+     0.0043,
+     0.5355,
+     0.0263,
+     0.4283
+    ],
+    [
+     1.0136,
+     0.8025,
+     0.081,
+     0.4591,
+     0.0448,
+     0.4288
+    ],
+    [
+     1.2023,
+     1.0368,
+     0.1613,
+     0.3813,
+     0.0652,
+     0.4317
+    ],
+    [
+     1.3526,
+     1.2046,
+     0.2225,
+     0.3222,
+     0.0815,
+     0.4344
+    ],
+    [
+     1.5109,
+     1.372,
+     0.2952,
+     0.2533,
+     0.0993,
+     0.4392
+    ],
+    [
+     1.5989,
+     1.5096,
+     0.3669,
+     0.1882,
+     0.1104,
+     0.4471
+    ],
+    [
+     1.6995,
+     1.614,
+     0.4304,
+     0.1341,
+     0.122,
+     0.4583
+    ],
+    [
+     1.7718,
+     1.6907,
+     0.4911,
+     0.0864,
+     0.1306,
+     0.474
+    ],
+    [
+     1.8357,
+     1.7257,
+     0.547,
+     0.0466,
+     0.1379,
+     0.4942
+    ],
+    [
+     1.8451,
+     1.7511,
+     0.5963,
+     0.0216,
+     0.1392,
+     0.5242
+    ],
+    [
+     1.8606,
+     1.7718,
+     0.636,
+     0.0131,
+     0.1402,
+     0.5627
+    ],
+    [
+     1.8097,
+     1.7848,
+     0.6828,
+     0.0062,
+     0.1342,
+     0.6115
+    ],
+    [
+     1.8127,
+     1.7987,
+     0.7194,
+     0.0033,
+     0.1335,
+     0.6535
+    ],
+    [
+     1.8124,
+     1.8106,
+     0.7585,
+     0.0015,
+     0.1324,
+     0.7
+    ],
+    [
+     1.797,
+     1.8232,
+     0.796,
+     0.0003,
+     0.13,
+     0.745
+    ],
+    [
+     1.807,
+     1.8329,
+     0.8293,
+     0.0002,
+     0.13,
+     0.7865
+    ],
+    [
+     1.8171,
+     1.8428,
+     0.8625,
+     0.0,
+     0.13,
+     0.8279
+    ],
+    [
+     1.8289,
+     1.8545,
+     0.9018,
+     0.0,
+     0.13,
+     0.8771
+    ],
+    [
+     1.84,
+     1.8657,
+     0.9391,
+     0.0,
+     0.13,
+     0.9238
+    ]
+   ],
+   "entropy": [
+    [
+     0.8344,
+     0.6179,
+     0.0062,
+     0.5337,
+     0.0261,
+     0.4283
+    ],
+    [
+     0.9814,
+     0.7698,
+     0.0785,
+     0.4615,
+     0.0415,
+     0.4285
+    ],
+    [
+     1.1597,
+     0.9482,
+     0.1478,
+     0.3929,
+     0.0605,
+     0.4294
+    ],
+    [
+     1.3056,
+     1.1286,
+     0.2125,
+     0.3298,
+     0.0767,
+     0.4315
+    ],
+    [
+     1.5096,
+     1.3512,
+     0.2949,
+     0.252,
+     0.0991,
+     0.4371
+    ],
+    [
+     1.589,
+     1.496,
+     0.3656,
+     0.1889,
+     0.1094,
+     0.4462
+    ],
+    [
+     1.698,
+     1.6105,
+     0.431,
+     0.1326,
+     0.1218,
+     0.4573
+    ],
+    [
+     1.7597,
+     1.6783,
+     0.4871,
+     0.091,
+     0.1293,
+     0.4748
+    ],
+    [
+     1.833,
+     1.7242,
+     0.5457,
+     0.0479,
+     0.1375,
+     0.4942
+    ],
+    [
+     1.8489,
+     1.7535,
+     0.5976,
+     0.0225,
+     0.1394,
+     0.5269
+    ],
+    [
+     1.8483,
+     1.7745,
+     0.6362,
+     0.0125,
+     0.1391,
+     0.5619
+    ],
+    [
+     1.8096,
+     1.785,
+     0.6825,
+     0.0062,
+     0.1342,
+     0.611
+    ],
+    [
+     1.8125,
+     1.7987,
+     0.7188,
+     0.0033,
+     0.1335,
+     0.6527
+    ],
+    [
+     1.812,
+     1.8103,
+     0.757,
+     0.0015,
+     0.1324,
+     0.6981
+    ],
+    [
+     1.7967,
+     1.8229,
+     0.7948,
+     0.0003,
+     0.13,
+     0.7435
+    ],
+    [
+     1.8068,
+     1.8327,
+     0.8286,
+     0.0002,
+     0.13,
+     0.7856
+    ],
+    [
+     1.8168,
+     1.8425,
+     0.8617,
+     0.0,
+     0.13,
+     0.8269
+    ],
+    [
+     1.8288,
+     1.8544,
+     0.9015,
+     0.0,
+     0.13,
+     0.8767
+    ],
+    [
+     1.8401,
+     1.8658,
+     0.9394,
+     0.0,
+     0.13,
+     0.9242
+    ]
+   ],
+   "ensemble_mi": [
+    [
+     0.8281,
+     0.6106,
+     0.0025,
+     0.5382,
+     0.0255,
+     0.4292
+    ],
+    [
+     0.9426,
+     0.764,
+     0.0824,
+     0.467,
+     0.0383,
+     0.4394
+    ],
+    [
+     1.059,
+     0.9189,
+     0.1483,
+     0.4052,
+     0.0512,
+     0.4446
+    ],
+    [
+     1.2229,
+     1.058,
+     0.2047,
+     0.353,
+     0.0682,
+     0.4498
+    ],
+    [
+     1.3286,
+     1.211,
+     0.2896,
+     0.2792,
+     0.0804,
+     0.4631
+    ],
+    [
+     1.4432,
+     1.3713,
+     0.365,
+     0.215,
+     0.0938,
+     0.4767
+    ],
+    [
+     1.5135,
+     1.4702,
+     0.4234,
+     0.1691,
+     0.1022,
+     0.4917
+    ],
+    [
+     1.5523,
+     1.5712,
+     0.4943,
+     0.1193,
+     0.1076,
+     0.5171
+    ],
+    [
+     1.6522,
+     1.6792,
+     0.5582,
+     0.0774,
+     0.1181,
+     0.5446
+    ],
+    [
+     1.7059,
+     1.7209,
+     0.5981,
+     0.0539,
+     0.124,
+     0.565
+    ],
+    [
+     1.7437,
+     1.7697,
+     0.6485,
+     0.0296,
+     0.1277,
+     0.5975
+    ],
+    [
+     1.7585,
+     1.8037,
+     0.697,
+     0.0131,
+     0.1288,
+     0.6371
+    ],
+    [
+     1.7786,
+     1.8129,
+     0.7354,
+     0.0068,
+     0.13,
+     0.6773
+    ],
+    [
+     1.7863,
+     1.8176,
+     0.7629,
+     0.0043,
+     0.13,
+     0.7085
+    ],
+    [
+     1.7986,
+     1.8266,
+     0.8018,
+     0.0017,
+     0.13,
+     0.754
+    ],
+    [
+     1.8087,
+     1.8354,
+     0.8352,
+     0.0005,
+     0.13,
+     0.7944
+    ],
+    [
+     1.8182,
+     1.8442,
+     0.8667,
+     0.0005,
+     0.13,
+     0.8337
+    ],
+    [
+     1.8297,
+     1.8555,
+     0.9046,
+     0.0,
+     0.13,
+     0.8806
+    ],
+    [
+     1.842,
+     1.8676,
+     0.9456,
+     0.0,
+     0.13,
+     0.9319
+    ]
+   ],
+   "random_endpoints": [
+    [
+     0.7908,
+     0.5959,
+     0.0,
+     0.5312,
+     0.0225,
+     0.4175
+    ],
+    [
+     1.8583,
+     1.7987,
+     1.0,
+     0.0,
+     0.13,
+     1.0
+    ]
+   ]
+  }
+ },
+ "referral_curves": {
+  "columns": [
+   "refer_rate",
+   "mel_miss_rate",
+   "benign_refer_rate"
+  ],
+  "curves": {
+   "expected_miss": [
+    [
+     0.0343,
+     0.7342,
+     0.0058
+    ],
+    [
+     0.0659,
+     0.5541,
+     0.0196
+    ],
+    [
+     0.0965,
+     0.452,
+     0.0406
+    ],
+    [
+     0.1288,
+     0.3649,
+     0.0648
+    ],
+    [
+     0.1556,
+     0.3018,
+     0.0856
+    ],
+    [
+     0.1904,
+     0.2402,
+     0.1162
+    ],
+    [
+     0.2193,
+     0.2102,
+     0.141
+    ],
+    [
+     0.2473,
+     0.1832,
+     0.1629
+    ],
+    [
+     0.2743,
+     0.1667,
+     0.1756
+    ],
+    [
+     0.2929,
+     0.1652,
+     0.1796
+    ],
+    [
+     0.3199,
+     0.1411,
+     0.1931
+    ],
+    [
+     0.342,
+     0.1246,
+     0.2121
+    ],
+    [
+     0.3694,
+     0.1111,
+     0.2396
+    ],
+    [
+     0.3952,
+     0.0931,
+     0.2648
+    ],
+    [
+     0.4152,
+     0.0781,
+     0.2854
+    ],
+    [
+     0.4428,
+     0.0646,
+     0.3156
+    ],
+    [
+     0.4746,
+     0.045,
+     0.3512
+    ],
+    [
+     0.4988,
+     0.0375,
+     0.3794
+    ],
+    [
+     0.5211,
+     0.033,
+     0.4062
+    ],
+    [
+     0.5407,
+     0.0255,
+     0.4294
+    ],
+    [
+     0.5553,
+     0.021,
+     0.4469
+    ],
+    [
+     0.5763,
+     0.0165,
+     0.4723
+    ],
+    [
+     0.5951,
+     0.015,
+     0.4956
+    ],
+    [
+     0.6126,
+     0.012,
+     0.5171
+    ],
+    [
+     0.6304,
+     0.0105,
+     0.539
+    ],
+    [
+     0.6515,
+     0.006,
+     0.5648
+    ],
+    [
+     0.6742,
+     0.003,
+     0.5927
+    ],
+    [
+     0.6881,
+     0.003,
+     0.61
+    ],
+    [
+     0.7028,
+     0.003,
+     0.6283
+    ],
+    [
+     0.7181,
+     0.0015,
+     0.6473
+    ],
+    [
+     0.7312,
+     0.0,
+     0.6635
+    ],
+    [
+     0.7462,
+     0.0,
+     0.6823
+    ],
+    [
+     0.7615,
+     0.0,
+     0.7015
+    ],
+    [
+     0.7743,
+     0.0,
+     0.7175
+    ],
+    [
+     0.7883,
+     0.0,
+     0.735
+    ],
+    [
+     0.8018,
+     0.0,
+     0.7519
+    ],
+    [
+     0.8216,
+     0.0,
+     0.7767
+    ],
+    [
+     0.8409,
+     0.0,
+     0.8008
+    ],
+    [
+     0.8539,
+     0.0,
+     0.8171
+    ],
+    [
+     0.8634,
+     0.0,
+     0.829
+    ],
+    [
+     0.876,
+     0.0,
+     0.8448
+    ],
+    [
+     0.8947,
+     0.0,
+     0.8681
+    ],
+    [
+     0.9115,
+     0.0,
+     0.8892
+    ],
+    [
+     0.9258,
+     0.0,
+     0.9071
+    ],
+    [
+     0.9379,
+     0.0,
+     0.9223
+    ],
+    [
+     0.9521,
+     0.0,
+     0.94
+    ],
+    [
+     0.9637,
+     0.0,
+     0.9546
+    ],
+    [
+     0.9774,
+     0.0,
+     0.9717
+    ],
+    [
+     0.9903,
+     0.0,
+     0.9879
+    ]
+   ],
+   "p_mel": [
+    [
+     0.0348,
+     0.7312,
+     0.006
+    ],
+    [
+     0.0662,
+     0.5511,
+     0.0196
+    ],
+    [
+     0.0982,
+     0.4459,
+     0.0419
+    ],
+    [
+     0.1276,
+     0.3694,
+     0.0646
+    ],
+    [
+     0.1578,
+     0.2898,
+     0.0877
+    ],
+    [
+     0.1894,
+     0.2342,
+     0.1175
+    ],
+    [
+     0.2197,
+     0.2027,
+     0.1473
+    ],
+    [
+     0.2531,
+     0.1562,
+     0.1781
+    ],
+    [
+     0.2766,
+     0.1276,
+     0.1998
+    ],
+    [
+     0.304,
+     0.1126,
+     0.2285
+    ],
+    [
+     0.3262,
+     0.0946,
+     0.2523
+    ],
+    [
+     0.3508,
+     0.0811,
+     0.2777
+    ],
+    [
+     0.3829,
+     0.0661,
+     0.3104
+    ],
+    [
+     0.4187,
+     0.0495,
+     0.3454
+    ],
+    [
+     0.4398,
+     0.042,
+     0.3683
+    ],
+    [
+     0.4575,
+     0.036,
+     0.3852
+    ],
+    [
+     0.4794,
+     0.033,
+     0.4096
+    ],
+    [
+     0.5022,
+     0.0255,
+     0.4315
+    ],
+    [
+     0.5225,
+     0.018,
+     0.4521
+    ],
+    [
+     0.5409,
+     0.0165,
+     0.47
+    ],
+    [
+     0.5582,
+     0.015,
+     0.4871
+    ],
+    [
+     0.5775,
+     0.0135,
+     0.5069
+    ],
+    [
+     0.5978,
+     0.0105,
+     0.5283
+    ],
+    [
+     0.6169,
+     0.0075,
+     0.5488
+    ],
+    [
+     0.64,
+     0.0045,
+     0.574
+    ],
+    [
+     0.6563,
+     0.003,
+     0.5927
+    ],
+    [
+     0.6718,
+     0.003,
+     0.6088
+    ],
+    [
+     0.683,
+     0.0015,
+     0.6208
+    ],
+    [
+     0.699,
+     0.0015,
+     0.6381
+    ],
+    [
+     0.7176,
+     0.0,
+     0.6596
+    ],
+    [
+     0.7317,
+     0.0,
+     0.676
+    ],
+    [
+     0.7449,
+     0.0,
+     0.6904
+    ],
+    [
+     0.7595,
+     0.0,
+     0.7073
+    ],
+    [
+     0.7748,
+     0.0,
+     0.7246
+    ],
+    [
+     0.7923,
+     0.0,
+     0.7452
+    ],
+    [
+     0.8076,
+     0.0,
+     0.7627
+    ],
+    [
+     0.8228,
+     0.0,
+     0.781
+    ],
+    [
+     0.8391,
+     0.0,
+     0.8008
+    ],
+    [
+     0.8512,
+     0.0,
+     0.8154
+    ],
+    [
+     0.8627,
+     0.0,
+     0.8292
+    ],
+    [
+     0.8772,
+     0.0,
+     0.8467
+    ],
+    [
+     0.8922,
+     0.0,
+     0.865
+    ],
+    [
+     0.912,
+     0.0,
+     0.8898
+    ],
+    [
+     0.9239,
+     0.0,
+     0.9048
+    ],
+    [
+     0.9348,
+     0.0,
+     0.9183
+    ],
+    [
+     0.9502,
+     0.0,
+     0.9377
+    ],
+    [
+     0.9622,
+     0.0,
+     0.9527
+    ],
+    [
+     0.9765,
+     0.0,
+     0.9706
+    ],
+    [
+     0.9889,
+     0.0,
+     0.986
+    ]
+   ],
+   "conformal_0.2": [
+    [
+     0.1852,
+     0.2447,
+     0.1135
+    ]
+   ],
+   "conformal_0.1": [
+    [
+     0.306,
+     0.1066,
+     0.2302
+    ]
+   ],
+   "conformal_0.05": [
+    [
+     0.414,
+     0.0511,
+     0.3415
+    ]
+   ],
+   "conformal_0.02": [
+    [
+     0.542,
+     0.0195,
+     0.4717
+    ]
+   ]
+  }
+ },
+ "sensitivity": [
+  {
+   "miss_mel": 10,
+   "reader_sensitivity": 1.0,
+   "bayes_cost": 0.2909,
+   "bayes_mel_miss": 0.1336,
+   "random_cost": 0.4909,
+   "random_mel_miss": 0.0991,
+   "msp_cost": 0.3515,
+   "msp_mel_miss": 0.1141,
+   "entropy_cost": 0.3516,
+   "entropy_mel_miss": 0.1141,
+   "ensemble_mi_cost": 0.3407,
+   "ensemble_mi_mel_miss": 0.0841
+  },
+  {
+   "miss_mel": 10,
+   "reader_sensitivity": 0.87,
+   "bayes_cost": 0.4211,
+   "bayes_mel_miss": 0.1106,
+   "random_cost": 0.5646,
+   "random_mel_miss": 0.1399,
+   "msp_cost": 0.4949,
+   "msp_mel_miss": 0.1879,
+   "entropy_cost": 0.4972,
+   "entropy_mel_miss": 0.1877,
+   "ensemble_mi_cost": 0.4776,
+   "ensemble_mi_mel_miss": 0.145
+  },
+  {
+   "miss_mel": 10,
+   "reader_sensitivity": 0.8,
+   "bayes_cost": 0.4513,
+   "bayes_mel_miss": 0.1099,
+   "random_cost": 0.5841,
+   "random_mel_miss": 0.1505,
+   "msp_cost": 0.5722,
+   "msp_mel_miss": 0.2276,
+   "entropy_cost": 0.5756,
+   "entropy_mel_miss": 0.2273,
+   "ensemble_mi_cost": 0.5513,
+   "ensemble_mi_mel_miss": 0.1778
+  },
+  {
+   "miss_mel": 30,
+   "reader_sensitivity": 1.0,
+   "bayes_cost": 0.3714,
+   "bayes_mel_miss": 0.0646,
+   "random_cost": 0.5858,
+   "random_mel_miss": 0.0435,
+   "msp_cost": 0.4843,
+   "msp_mel_miss": 0.0601,
+   "entropy_cost": 0.4824,
+   "entropy_mel_miss": 0.0601,
+   "ensemble_mi_cost": 0.4483,
+   "ensemble_mi_mel_miss": 0.0435
+  },
+  {
+   "miss_mel": 30,
+   "reader_sensitivity": 0.87,
+   "bayes_cost": 0.5479,
+   "bayes_mel_miss": 0.0516,
+   "random_cost": 0.72,
+   "random_mel_miss": 0.0776,
+   "msp_cost": 0.7913,
+   "msp_mel_miss": 0.1338,
+   "entropy_cost": 0.7911,
+   "entropy_mel_miss": 0.1336,
+   "ensemble_mi_cost": 0.7203,
+   "ensemble_mi_mel_miss": 0.1044
+  },
+  {
+   "miss_mel": 30,
+   "reader_sensitivity": 0.8,
+   "bayes_cost": 0.5817,
+   "bayes_mel_miss": 0.0529,
+   "random_cost": 0.7836,
+   "random_mel_miss": 0.0937,
+   "msp_cost": 0.9566,
+   "msp_mel_miss": 0.1736,
+   "entropy_cost": 0.9573,
+   "entropy_mel_miss": 0.1733,
+   "ensemble_mi_cost": 0.8667,
+   "ensemble_mi_mel_miss": 0.1372
+  },
+  {
+   "miss_mel": 100,
+   "reader_sensitivity": 1.0,
+   "bayes_cost": 0.4515,
+   "bayes_mel_miss": 0.0255,
+   "random_cost": 0.6752,
+   "random_mel_miss": 0.0165,
+   "msp_cost": 0.6314,
+   "msp_mel_miss": 0.0255,
+   "entropy_cost": 0.63,
+   "entropy_mel_miss": 0.0255,
+   "ensemble_mi_cost": 0.5841,
+   "ensemble_mi_mel_miss": 0.0195
+  },
+  {
+   "miss_mel": 100,
+   "reader_sensitivity": 0.87,
+   "bayes_cost": 0.7205,
+   "bayes_mel_miss": 0.0229,
+   "random_cost": 1.0264,
+   "random_mel_miss": 0.0459,
+   "msp_cost": 1.5109,
+   "msp_mel_miss": 0.0993,
+   "entropy_cost": 1.5096,
+   "entropy_mel_miss": 0.0991,
+   "ensemble_mi_cost": 1.3286,
+   "ensemble_mi_mel_miss": 0.0804
+  },
+  {
+   "miss_mel": 100,
+   "reader_sensitivity": 0.8,
+   "bayes_cost": 0.7649,
+   "bayes_mel_miss": 0.0243,
+   "random_cost": 1.225,
+   "random_mel_miss": 0.0625,
+   "msp_cost": 1.9844,
+   "msp_mel_miss": 0.139,
+   "entropy_cost": 1.9833,
+   "entropy_mel_miss": 0.1387,
+   "ensemble_mi_cost": 1.7294,
+   "ensemble_mi_mel_miss": 0.1132
+  },
+  {
+   "miss_mel": 300,
+   "reader_sensitivity": 1.0,
+   "bayes_cost": 0.5875,
+   "bayes_mel_miss": 0.012,
+   "random_cost": 0.8544,
+   "random_mel_miss": 0.009,
+   "msp_cost": 0.8131,
+   "msp_mel_miss": 0.012,
+   "entropy_cost": 0.812,
+   "entropy_mel_miss": 0.012,
+   "ensemble_mi_cost": 0.7232,
+   "ensemble_mi_mel_miss": 0.009
+  },
+  {
+   "miss_mel": 300,
+   "reader_sensitivity": 0.87,
+   "bayes_cost": 0.8595,
+   "bayes_mel_miss": 0.0094,
+   "random_cost": 1.801,
+   "random_mel_miss": 0.0369,
+   "msp_cost": 3.3281,
+   "msp_mel_miss": 0.0858,
+   "entropy_cost": 3.3229,
+   "entropy_mel_miss": 0.0856,
+   "ensemble_mi_cost": 2.8177,
+   "ensemble_mi_mel_miss": 0.0699
+  },
+  {
+   "miss_mel": 300,
+   "reader_sensitivity": 0.8,
+   "bayes_cost": 0.8307,
+   "bayes_mel_miss": 0.0078,
+   "random_cost": 2.4793,
+   "random_mel_miss": 0.0571,
+   "msp_cost": 4.6823,
+   "msp_mel_miss": 0.1255,
+   "entropy_cost": 4.6749,
+   "entropy_mel_miss": 0.1252,
+   "ensemble_mi_cost": 3.9454,
+   "ensemble_mi_mel_miss": 0.1027
+  }
+ ],
+ "prior_shift": {
+  "deploy_prior": {
+   "akiec": 0.0076,
+   "bcc": 0.0111,
+   "bkl": 0.1239,
+   "df": 0.0126,
+   "mel": 0.0225,
+   "nv": 0.8071,
+   "vasc": 0.0152
+  },
+  "table": {
+   "ham_prevalence": {
+    "defer_knob": 0.331,
+    "cost": 0.7205,
+    "defer_rate": 0.2237,
+    "refer_rate": 0.3861,
+    "mel_miss_rate": 0.0229,
+    "benign_human_rate": 0.5135
+   },
+   "screening_prevalence": {
+    "defer_knob": 0.2882,
+    "cost": 0.3785,
+    "defer_rate": 0.2741,
+    "refer_rate": 0.1301,
+    "mel_miss_rate": 0.0692,
+    "benign_human_rate": 0.3798
+   }
+  }
+ },
+ "risk_coverage": {
+  "aurc": [
+   {
+    "score": "msp",
+    "kind": "value",
+    "point": 0.0386,
+    "lo": 0.0323,
+    "hi": 0.045,
+    "seed_min": 0.0385,
+    "seed_max": 0.039
+   },
+   {
+    "score": "entropy",
+    "kind": "value",
+    "point": 0.0393,
+    "lo": 0.0331,
+    "hi": 0.0457,
+    "seed_min": 0.0392,
+    "seed_max": 0.0395
+   },
+   {
+    "score": "entropy",
+    "kind": "delta_vs_msp",
+    "point": 0.0007,
+    "lo": 0.0002,
+    "hi": 0.0013,
+    "seed_min": 0.0006,
+    "seed_max": 0.0009
+   },
+   {
+    "score": "ensemble_mi",
+    "kind": "value",
+    "point": 0.0432,
+    "lo": 0.0363,
+    "hi": 0.0499,
+    "seed_min": 0.042,
+    "seed_max": 0.0451
+   },
+   {
+    "score": "ensemble_mi",
+    "kind": "delta_vs_msp",
+    "point": 0.0046,
+    "lo": 0.0013,
+    "hi": 0.008,
+    "seed_min": 0.0035,
+    "seed_max": 0.0062
+   }
+  ],
+  "curves_seed0": {
+   "msp": {
+    "coverage": [
+     0.0005,
+     0.0105,
+     0.0205,
+     0.0305,
+     0.0404,
+     0.0509,
+     0.0609,
+     0.0709,
+     0.0809,
+     0.0914,
+     0.1013,
+     0.1113,
+     0.1213,
+     0.1313,
+     0.1418,
+     0.1518,
+     0.1618,
+     0.1717,
+     0.1822,
+     0.1922,
+     0.2022,
+     0.2122,
+     0.2222,
+     0.2327,
+     0.2426,
+     0.2526,
+     0.2626,
+     0.2731,
+     0.2831,
+     0.2931,
+     0.303,
+     0.313,
+     0.3235,
+     0.3335,
+     0.3435,
+     0.3535,
+     0.364,
+     0.3739,
+     0.3839,
+     0.3939,
+     0.4039,
+     0.4144,
+     0.4244,
+     0.4343,
+     0.4443,
+     0.4548,
+     0.4648,
+     0.4748,
+     0.4848,
+     0.4948,
+     0.5052,
+     0.5152,
+     0.5252,
+     0.5352,
+     0.5457,
+     0.5557,
+     0.5657,
+     0.5756,
+     0.5856,
+     0.5961,
+     0.6061,
+     0.6161,
+     0.6261,
+     0.6365,
+     0.6465,
+     0.6565,
+     0.6665,
+     0.6765,
+     0.687,
+     0.697,
+     0.7069,
+     0.7169,
+     0.7274,
+     0.7374,
+     0.7474,
+     0.7574,
+     0.7673,
+     0.7778,
+     0.7878,
+     0.7978,
+     0.8078,
+     0.8183,
+     0.8283,
+     0.8382,
+     0.8482,
+     0.8582,
+     0.8687,
+     0.8787,
+     0.8887,
+     0.8987,
+     0.9091,
+     0.9191,
+     0.9291,
+     0.9391,
+     0.9491,
+     0.9596,
+     0.9695,
+     0.9795,
+     0.9895,
+     1.0
+    ],
+    "risk": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0024,
+     0.0022,
+     0.0021,
+     0.0041,
+     0.004,
+     0.0038,
+     0.0055,
+     0.0071,
+     0.0068,
+     0.0066,
+     0.0064,
+     0.0093,
+     0.0105,
+     0.0102,
+     0.0099,
+     0.0096,
+     0.0093,
+     0.0091,
+     0.0089,
+     0.0087,
+     0.0096,
+     0.0094,
+     0.0092,
+     0.0101,
+     0.0099,
+     0.0118,
+     0.0137,
+     0.0154,
+     0.0161,
+     0.0158,
+     0.0174,
+     0.0171,
+     0.0177,
+     0.0201,
+     0.0234,
+     0.0256,
+     0.0286,
+     0.0298,
+     0.0327,
+     0.0346,
+     0.0357,
+     0.0375,
+     0.0392,
+     0.0432,
+     0.0441,
+     0.0434,
+     0.0458,
+     0.048,
+     0.0516,
+     0.0537,
+     0.055,
+     0.057,
+     0.0589,
+     0.0621,
+     0.0653,
+     0.0664,
+     0.0693,
+     0.0703,
+     0.0751,
+     0.0785,
+     0.083,
+     0.0868,
+     0.0905,
+     0.0924,
+     0.096,
+     0.1029,
+     0.1091,
+     0.1146,
+     0.1183,
+     0.1236,
+     0.1287,
+     0.1327,
+     0.1377,
+     0.1394,
+     0.1446,
+     0.1488,
+     0.1529,
+     0.1584,
+     0.1663
+    ]
+   },
+   "entropy": {
+    "coverage": [
+     0.0005,
+     0.0105,
+     0.0205,
+     0.0305,
+     0.0404,
+     0.0509,
+     0.0609,
+     0.0709,
+     0.0809,
+     0.0914,
+     0.1013,
+     0.1113,
+     0.1213,
+     0.1313,
+     0.1418,
+     0.1518,
+     0.1618,
+     0.1717,
+     0.1822,
+     0.1922,
+     0.2022,
+     0.2122,
+     0.2222,
+     0.2327,
+     0.2426,
+     0.2526,
+     0.2626,
+     0.2731,
+     0.2831,
+     0.2931,
+     0.303,
+     0.313,
+     0.3235,
+     0.3335,
+     0.3435,
+     0.3535,
+     0.364,
+     0.3739,
+     0.3839,
+     0.3939,
+     0.4039,
+     0.4144,
+     0.4244,
+     0.4343,
+     0.4443,
+     0.4548,
+     0.4648,
+     0.4748,
+     0.4848,
+     0.4948,
+     0.5052,
+     0.5152,
+     0.5252,
+     0.5352,
+     0.5457,
+     0.5557,
+     0.5657,
+     0.5756,
+     0.5856,
+     0.5961,
+     0.6061,
+     0.6161,
+     0.6261,
+     0.6365,
+     0.6465,
+     0.6565,
+     0.6665,
+     0.6765,
+     0.687,
+     0.697,
+     0.7069,
+     0.7169,
+     0.7274,
+     0.7374,
+     0.7474,
+     0.7574,
+     0.7673,
+     0.7778,
+     0.7878,
+     0.7978,
+     0.8078,
+     0.8183,
+     0.8283,
+     0.8382,
+     0.8482,
+     0.8582,
+     0.8687,
+     0.8787,
+     0.8887,
+     0.8987,
+     0.9091,
+     0.9191,
+     0.9291,
+     0.9391,
+     0.9491,
+     0.9596,
+     0.9695,
+     0.9795,
+     0.9895,
+     1.0
+    ],
+    "risk": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0024,
+     0.0022,
+     0.0021,
+     0.0041,
+     0.004,
+     0.0038,
+     0.0055,
+     0.0071,
+     0.0068,
+     0.0066,
+     0.0064,
+     0.0093,
+     0.0105,
+     0.0102,
+     0.0099,
+     0.0096,
+     0.0093,
+     0.0091,
+     0.0089,
+     0.0087,
+     0.0096,
+     0.0094,
+     0.0103,
+     0.0101,
+     0.0099,
+     0.0118,
+     0.0147,
+     0.0165,
+     0.0161,
+     0.0168,
+     0.0165,
+     0.0171,
+     0.0177,
+     0.0201,
+     0.0243,
+     0.0265,
+     0.0278,
+     0.0307,
+     0.0318,
+     0.0362,
+     0.0373,
+     0.0383,
+     0.0392,
+     0.0432,
+     0.0449,
+     0.0464,
+     0.0465,
+     0.048,
+     0.0494,
+     0.0516,
+     0.0536,
+     0.0556,
+     0.0589,
+     0.0608,
+     0.0666,
+     0.0709,
+     0.0751,
+     0.0792,
+     0.0807,
+     0.0853,
+     0.0879,
+     0.0916,
+     0.0929,
+     0.0965,
+     0.1012,
+     0.1046,
+     0.1091,
+     0.114,
+     0.1189,
+     0.1247,
+     0.1266,
+     0.1306,
+     0.135,
+     0.1389,
+     0.1446,
+     0.1504,
+     0.1544,
+     0.1609,
+     0.1663
+    ]
+   },
+   "ensemble_mi": {
+    "coverage": [
+     0.0005,
+     0.0105,
+     0.0205,
+     0.0305,
+     0.0404,
+     0.0509,
+     0.0609,
+     0.0709,
+     0.0809,
+     0.0914,
+     0.1013,
+     0.1113,
+     0.1213,
+     0.1313,
+     0.1418,
+     0.1518,
+     0.1618,
+     0.1717,
+     0.1822,
+     0.1922,
+     0.2022,
+     0.2122,
+     0.2222,
+     0.2327,
+     0.2426,
+     0.2526,
+     0.2626,
+     0.2731,
+     0.2831,
+     0.2931,
+     0.303,
+     0.313,
+     0.3235,
+     0.3335,
+     0.3435,
+     0.3535,
+     0.364,
+     0.3739,
+     0.3839,
+     0.3939,
+     0.4039,
+     0.4144,
+     0.4244,
+     0.4343,
+     0.4443,
+     0.4548,
+     0.4648,
+     0.4748,
+     0.4848,
+     0.4948,
+     0.5052,
+     0.5152,
+     0.5252,
+     0.5352,
+     0.5457,
+     0.5557,
+     0.5657,
+     0.5756,
+     0.5856,
+     0.5961,
+     0.6061,
+     0.6161,
+     0.6261,
+     0.6365,
+     0.6465,
+     0.6565,
+     0.6665,
+     0.6765,
+     0.687,
+     0.697,
+     0.7069,
+     0.7169,
+     0.7274,
+     0.7374,
+     0.7474,
+     0.7574,
+     0.7673,
+     0.7778,
+     0.7878,
+     0.7978,
+     0.8078,
+     0.8183,
+     0.8283,
+     0.8382,
+     0.8482,
+     0.8582,
+     0.8687,
+     0.8787,
+     0.8887,
+     0.8987,
+     0.9091,
+     0.9191,
+     0.9291,
+     0.9391,
+     0.9491,
+     0.9596,
+     0.9695,
+     0.9795,
+     0.9895,
+     1.0
+    ],
+    "risk": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0017,
+     0.0016,
+     0.0032,
+     0.0046,
+     0.0045,
+     0.0044,
+     0.0056,
+     0.0069,
+     0.008,
+     0.0078,
+     0.0076,
+     0.0087,
+     0.0108,
+     0.0118,
+     0.0126,
+     0.0146,
+     0.0176,
+     0.0172,
+     0.0189,
+     0.0206,
+     0.0232,
+     0.0257,
+     0.0281,
+     0.0295,
+     0.0308,
+     0.032,
+     0.0332,
+     0.0335,
+     0.0338,
+     0.0375,
+     0.0427,
+     0.0453,
+     0.0478,
+     0.051,
+     0.0541,
+     0.0571,
+     0.0563,
+     0.0607,
+     0.0613,
+     0.064,
+     0.0652,
+     0.0678,
+     0.0717,
+     0.0741,
+     0.0765,
+     0.0788,
+     0.0804,
+     0.0826,
+     0.0866,
+     0.0913,
+     0.0964,
+     0.0995,
+     0.1062,
+     0.1103,
+     0.112,
+     0.116,
+     0.1175,
+     0.1213,
+     0.1233,
+     0.1253,
+     0.1272,
+     0.1301,
+     0.1347,
+     0.1392,
+     0.1425,
+     0.1462,
+     0.1519,
+     0.1529,
+     0.157,
+     0.1604,
+     0.1663
+    ]
+   }
+  }
+ }
+}

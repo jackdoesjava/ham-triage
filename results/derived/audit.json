@@ -1,0 +1,977 @@
+{
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "n_boot": 1000,
+ "n_test": 2003,
+ "n_test_lesions": 1885,
+ "n_leaked": 842,
+ "n_unleaked": 1161,
+ "leak_rate": 0.42036944583125313,
+ "leak_rate_mel": 0.7342342342342343,
+ "headline": {
+  "bal_acc": {
+   "clean": {
+    "point": 0.690219290961846,
+    "lo": 0.6535354878129728,
+    "hi": 0.7277774669219021,
+    "seed_min": 0.6634528567251162,
+    "seed_max": 0.7100236766955688
+   },
+   "leaky": {
+    "point": 0.7708429159003067,
+    "lo": 0.7383376844170862,
+    "hi": 0.8009971790334428,
+    "seed_min": 0.7664784845953884,
+    "seed_max": 0.7783838271190612
+   },
+   "delta": {
+    "point": 0.08062362493846076,
+    "lo": 0.04530989601284755,
+    "hi": 0.11437340443252537,
+    "seed_min": 0.0564548078998196,
+    "seed_max": 0.11493097039394495
+   }
+  },
+  "mel_recall": {
+   "clean": {
+    "point": 0.5660660660660661,
+    "lo": 0.5057259972954699,
+    "hi": 0.6266392732731577,
+    "seed_min": 0.5315315315315315,
+    "seed_max": 0.5945945945945946
+   },
+   "leaky": {
+    "point": 0.6906906906906908,
+    "lo": 0.6391274286437568,
+    "hi": 0.7445064133940785,
+    "seed_min": 0.6486486486486487,
+    "seed_max": 0.7207207207207207
+   },
+   "delta": {
+    "point": 0.12462462462462465,
+    "lo": 0.07750732127476306,
+    "hi": 0.17214659568254828,
+    "seed_min": 0.05405405405405406,
+    "seed_max": 0.1711711711711712
+   }
+  },
+  "leaked_delta": {
+   "bal_acc": {
+    "point": 0.19454242488195517,
+    "lo": 0.1438351480751458,
+    "hi": 0.24306055538301682,
+    "seed_min": 0.1750465829060165,
+    "seed_max": 0.20557989260687382
+   },
+   "mel": {
+    "point": 0.18404907975460116,
+    "lo": 0.12850242433147216,
+    "hi": 0.24242903720751816,
+    "seed_min": 0.08588957055214719,
+    "seed_max": 0.25153374233128833
+   }
+  },
+  "unleaked_delta": {
+   "bal_acc": {
+    "point": -0.01726690194237135,
+    "lo": -0.0476208101109547,
+    "hi": 0.011936625667488533,
+    "seed_min": -0.047327773052278865,
+    "seed_max": 0.021531653454854416
+   },
+   "mel": {
+    "point": -0.039548022598870025,
+    "lo": -0.10753478810879191,
+    "hi": 0.023820346320346443,
+    "seed_min": -0.05084745762711862,
+    "seed_max": -0.03389830508474578
+   }
+  }
+ },
+ "naive_image_split": {
+  "acc": {
+   "point": 0.9021467798302546,
+   "lo": 0.8883869281756606,
+   "hi": 0.9147164024699208
+  },
+  "bal_acc": {
+   "point": 0.8064483866867275,
+   "lo": 0.7682537897265328,
+   "hi": 0.842458543320704
+  },
+  "akiec": {
+   "point": 0.704225352112676,
+   "lo": 0.5949183636030085,
+   "hi": 0.8194444444444444
+  },
+  "bcc": {
+   "point": 0.8636363636363636,
+   "lo": 0.788135593220339,
+   "hi": 0.9270833333333334
+  },
+  "bkl": {
+   "point": 0.7582938388625592,
+   "lo": 0.6956375511795672,
+   "hi": 0.8177878787878788
+  },
+  "df": {
+   "point": 0.7241379310344828,
+   "lo": 0.5404885654885656,
+   "hi": 0.9090909090909091
+  },
+  "mel": {
+   "point": 0.7612612612612613,
+   "lo": 0.6983453263037903,
+   "hi": 0.8190482796892341
+  },
+  "nv": {
+   "point": 0.9669172932330827,
+   "lo": 0.9576133363970337,
+   "hi": 0.975950989779539
+  },
+  "vasc": {
+   "point": 0.8666666666666667,
+   "lo": 0.7391304347826086,
+   "hi": 0.9666666666666667
+  }
+ },
+ "per_lesion": {
+  "clean": {
+   "acc": 0.8462,
+   "bal_acc": 0.6885,
+   "akiec": 0.625,
+   "bcc": 0.7423,
+   "bkl": 0.7054,
+   "df": 0.4167,
+   "mel": 0.5621,
+   "nv": 0.9413,
+   "vasc": 0.8272
+  },
+  "leaky": {
+   "acc": 0.8967,
+   "bal_acc": 0.7781,
+   "akiec": 0.7083,
+   "bcc": 0.7801,
+   "bkl": 0.7407,
+   "df": 0.6806,
+   "mel": 0.6961,
+   "nv": 0.9764,
+   "vasc": 0.8642
+  }
+ },
+ "table": [
+  {
+   "subset": "all",
+   "cond": "clean",
+   "metric": "acc",
+   "point": 0.8394,
+   "lo": 0.8254,
+   "hi": 0.8534,
+   "seed_min": 0.8337,
+   "seed_max": 0.8422
+  },
+  {
+   "subset": "all",
+   "cond": "leaky",
+   "metric": "acc",
+   "point": 0.8887,
+   "lo": 0.8765,
+   "hi": 0.9015,
+   "seed_min": 0.8822,
+   "seed_max": 0.8927
+  },
+  {
+   "subset": "all",
+   "cond": "delta",
+   "metric": "acc",
+   "point": 0.0493,
+   "lo": 0.0379,
+   "hi": 0.0589,
+   "seed_min": 0.0399,
+   "seed_max": 0.0574
+  },
+  {
+   "subset": "all",
+   "cond": "clean",
+   "metric": "bal_acc",
+   "point": 0.6902,
+   "lo": 0.6535,
+   "hi": 0.7278,
+   "seed_min": 0.6635,
+   "seed_max": 0.71
+  },
+  {
+   "subset": "all",
+   "cond": "leaky",
+   "metric": "bal_acc",
+   "point": 0.7708,
+   "lo": 0.7383,
+   "hi": 0.801,
+   "seed_min": 0.7665,
+   "seed_max": 0.7784
+  },
+  {
+   "subset": "all",
+   "cond": "delta",
+   "metric": "bal_acc",
+   "point": 0.0806,
+   "lo": 0.0453,
+   "hi": 0.1144,
+   "seed_min": 0.0565,
+   "seed_max": 0.1149
+  },
+  {
+   "subset": "all",
+   "cond": "clean",
+   "metric": "akiec",
+   "point": 0.615,
+   "lo": 0.5125,
+   "hi": 0.7161,
+   "seed_min": 0.5775,
+   "seed_max": 0.6479
+  },
+  {
+   "subset": "all",
+   "cond": "leaky",
+   "metric": "akiec",
+   "point": 0.6948,
+   "lo": 0.6023,
+   "hi": 0.7895,
+   "seed_min": 0.6338,
+   "seed_max": 0.7324
+  },
+  {
+   "subset": "all",
+   "cond": "delta",
+   "metric": "akiec",
+   "point": 0.0798,
+   "lo": 0.0047,
+   "hi": 0.1546,
+   "seed_min": -0.0141,
+   "seed_max": 0.1549
+  },
+  {
+   "subset": "all",
+   "cond": "clean",
+   "metric": "bcc",
+   "point": 0.7394,
+   "lo": 0.6638,
+   "hi": 0.8148,
+   "seed_min": 0.7182,
+   "seed_max": 0.7636
+  },
+  {
+   "subset": "all",
+   "cond": "leaky",
+   "metric": "bcc",
+   "point": 0.7727,
+   "lo": 0.6936,
+   "hi": 0.845,
+   "seed_min": 0.7,
+   "seed_max": 0.8273
+  },
+  {
+   "subset": "all",
+   "cond": "delta",
+   "metric": "bcc",
+   "point": 0.0333,
+   "lo": -0.0259,
+   "hi": 0.0871,
+   "seed_min": -0.0636,
+   "seed_max": 0.1091
+  },
+  {
+   "subset": "all",
+   "cond": "clean",
+   "metric": "bkl",
+   "point": 0.7046,
+   "lo": 0.6509,
+   "hi": 0.7573,
+   "seed_min": 0.6919,
+   "seed_max": 0.7251
+  },
+  {
+   "subset": "all",
+   "cond": "leaky",
+   "metric": "bkl",
+   "point": 0.733,
+   "lo": 0.682,
+   "hi": 0.7828,
+   "seed_min": 0.6919,
+   "seed_max": 0.763
+  },
+  {
+   "subset": "all",
+   "cond": "delta",
+   "metric": "bkl",
+   "point": 0.0284,
+   "lo": -0.0102,
+   "hi": 0.0737,
+   "seed_min": -0.0047,
+   "seed_max": 0.0711
+  },
+  {
+   "subset": "all",
+   "cond": "clean",
+   "metric": "df",
+   "point": 0.4598,
+   "lo": 0.3067,
+   "hi": 0.6204,
+   "seed_min": 0.4138,
+   "seed_max": 0.5517
+  },
+  {
+   "subset": "all",
+   "cond": "leaky",
+   "metric": "df",
+   "point": 0.6552,
+   "lo": 0.5,
+   "hi": 0.8021,
+   "seed_min": 0.5862,
+   "seed_max": 0.7586
+  },
+  {
+   "subset": "all",
+   "cond": "delta",
+   "metric": "df",
+   "point": 0.1954,
+   "lo": 0.029,
+   "hi": 0.3652,
+   "seed_min": 0.0345,
+   "seed_max": 0.3448
+  },
+  {
+   "subset": "all",
+   "cond": "clean",
+   "metric": "mel",
+   "point": 0.5661,
+   "lo": 0.5057,
+   "hi": 0.6266,
+   "seed_min": 0.5315,
+   "seed_max": 0.5946
+  },
+  {
+   "subset": "all",
+   "cond": "leaky",
+   "metric": "mel",
+   "point": 0.6907,
+   "lo": 0.6391,
+   "hi": 0.7445,
+   "seed_min": 0.6486,
+   "seed_max": 0.7207
+  },
+  {
+   "subset": "all",
+   "cond": "delta",
+   "metric": "mel",
+   "point": 0.1246,
+   "lo": 0.0775,
+   "hi": 0.1721,
+   "seed_min": 0.0541,
+   "seed_max": 0.1712
+  },
+  {
+   "subset": "all",
+   "cond": "clean",
+   "metric": "nv",
+   "point": 0.9356,
+   "lo": 0.9235,
+   "hi": 0.947,
+   "seed_min": 0.9301,
+   "seed_max": 0.9398
+  },
+  {
+   "subset": "all",
+   "cond": "leaky",
+   "metric": "nv",
+   "point": 0.9717,
+   "lo": 0.9633,
+   "hi": 0.979,
+   "seed_min": 0.9707,
+   "seed_max": 0.9737
+  },
+  {
+   "subset": "all",
+   "cond": "delta",
+   "metric": "nv",
+   "point": 0.0361,
+   "lo": 0.0266,
+   "hi": 0.0446,
+   "seed_min": 0.0338,
+   "seed_max": 0.0406
+  },
+  {
+   "subset": "all",
+   "cond": "clean",
+   "metric": "vasc",
+   "point": 0.8111,
+   "lo": 0.6552,
+   "hi": 0.9487,
+   "seed_min": 0.7667,
+   "seed_max": 0.8333
+  },
+  {
+   "subset": "all",
+   "cond": "leaky",
+   "metric": "vasc",
+   "point": 0.8778,
+   "lo": 0.7658,
+   "hi": 0.9655,
+   "seed_min": 0.8333,
+   "seed_max": 0.9
+  },
+  {
+   "subset": "all",
+   "cond": "delta",
+   "metric": "vasc",
+   "point": 0.0667,
+   "lo": -0.0506,
+   "hi": 0.207,
+   "seed_min": 0.0,
+   "seed_max": 0.1333
+  },
+  {
+   "subset": "leaked",
+   "cond": "clean",
+   "metric": "acc",
+   "point": 0.7474,
+   "lo": 0.721,
+   "hi": 0.7716,
+   "seed_min": 0.7399,
+   "seed_max": 0.753
+  },
+  {
+   "subset": "leaked",
+   "cond": "leaky",
+   "metric": "acc",
+   "point": 0.8626,
+   "lo": 0.8434,
+   "hi": 0.8815,
+   "seed_min": 0.8504,
+   "seed_max": 0.8777
+  },
+  {
+   "subset": "leaked",
+   "cond": "delta",
+   "metric": "acc",
+   "point": 0.1152,
+   "lo": 0.0953,
+   "hi": 0.1341,
+   "seed_min": 0.101,
+   "seed_max": 0.1247
+  },
+  {
+   "subset": "leaked",
+   "cond": "clean",
+   "metric": "bal_acc",
+   "point": 0.6151,
+   "lo": 0.5615,
+   "hi": 0.6705,
+   "seed_min": 0.5861,
+   "seed_max": 0.6448
+  },
+  {
+   "subset": "leaked",
+   "cond": "leaky",
+   "metric": "bal_acc",
+   "point": 0.8096,
+   "lo": 0.7683,
+   "hi": 0.8507,
+   "seed_min": 0.7891,
+   "seed_max": 0.82
+  },
+  {
+   "subset": "leaked",
+   "cond": "delta",
+   "metric": "bal_acc",
+   "point": 0.1945,
+   "lo": 0.1438,
+   "hi": 0.2431,
+   "seed_min": 0.175,
+   "seed_max": 0.2056
+  },
+  {
+   "subset": "leaked",
+   "cond": "clean",
+   "metric": "akiec",
+   "point": 0.5833,
+   "lo": 0.4091,
+   "hi": 0.7667,
+   "seed_min": 0.5357,
+   "seed_max": 0.6429
+  },
+  {
+   "subset": "leaked",
+   "cond": "leaky",
+   "metric": "akiec",
+   "point": 0.7381,
+   "lo": 0.5964,
+   "hi": 0.8889,
+   "seed_min": 0.6786,
+   "seed_max": 0.8214
+  },
+  {
+   "subset": "leaked",
+   "cond": "delta",
+   "metric": "akiec",
+   "point": 0.1548,
+   "lo": 0.0123,
+   "hi": 0.2917,
+   "seed_min": 0.0357,
+   "seed_max": 0.25
+  },
+  {
+   "subset": "leaked",
+   "cond": "clean",
+   "metric": "bcc",
+   "point": 0.7778,
+   "lo": 0.6831,
+   "hi": 0.8654,
+   "seed_min": 0.7544,
+   "seed_max": 0.807
+  },
+  {
+   "subset": "leaked",
+   "cond": "leaky",
+   "metric": "bcc",
+   "point": 0.8655,
+   "lo": 0.7794,
+   "hi": 0.9434,
+   "seed_min": 0.8246,
+   "seed_max": 0.8947
+  },
+  {
+   "subset": "leaked",
+   "cond": "delta",
+   "metric": "bcc",
+   "point": 0.0877,
+   "lo": 0.0057,
+   "hi": 0.1633,
+   "seed_min": 0.0175,
+   "seed_max": 0.1228
+  },
+  {
+   "subset": "leaked",
+   "cond": "clean",
+   "metric": "bkl",
+   "point": 0.646,
+   "lo": 0.5701,
+   "hi": 0.7195,
+   "seed_min": 0.6195,
+   "seed_max": 0.6637
+  },
+  {
+   "subset": "leaked",
+   "cond": "leaky",
+   "metric": "bkl",
+   "point": 0.7552,
+   "lo": 0.6891,
+   "hi": 0.8212,
+   "seed_min": 0.6991,
+   "seed_max": 0.8142
+  },
+  {
+   "subset": "leaked",
+   "cond": "delta",
+   "metric": "bkl",
+   "point": 0.1091,
+   "lo": 0.048,
+   "hi": 0.1733,
+   "seed_min": 0.0796,
+   "seed_max": 0.1593
+  },
+  {
+   "subset": "leaked",
+   "cond": "clean",
+   "metric": "df",
+   "point": 0.2,
+   "lo": 0.0369,
+   "hi": 0.4169,
+   "seed_min": 0.1,
+   "seed_max": 0.3
+  },
+  {
+   "subset": "leaked",
+   "cond": "leaky",
+   "metric": "df",
+   "point": 0.8333,
+   "lo": 0.6667,
+   "hi": 1.0,
+   "seed_min": 0.7,
+   "seed_max": 1.0
+  },
+  {
+   "subset": "leaked",
+   "cond": "delta",
+   "metric": "df",
+   "point": 0.6333,
+   "lo": 0.4,
+   "hi": 0.8333,
+   "seed_min": 0.5,
+   "seed_max": 0.9
+  },
+  {
+   "subset": "leaked",
+   "cond": "clean",
+   "metric": "mel",
+   "point": 0.5481,
+   "lo": 0.4812,
+   "hi": 0.621,
+   "seed_min": 0.4969,
+   "seed_max": 0.589
+  },
+  {
+   "subset": "leaked",
+   "cond": "leaky",
+   "metric": "mel",
+   "point": 0.7321,
+   "lo": 0.6782,
+   "hi": 0.7904,
+   "seed_min": 0.6748,
+   "seed_max": 0.773
+  },
+  {
+   "subset": "leaked",
+   "cond": "delta",
+   "metric": "mel",
+   "point": 0.184,
+   "lo": 0.1285,
+   "hi": 0.2424,
+   "seed_min": 0.0859,
+   "seed_max": 0.2515
+  },
+  {
+   "subset": "leaked",
+   "cond": "clean",
+   "metric": "nv",
+   "point": 0.8653,
+   "lo": 0.8373,
+   "hi": 0.893,
+   "seed_min": 0.8477,
+   "seed_max": 0.8852
+  },
+  {
+   "subset": "leaked",
+   "cond": "leaky",
+   "metric": "nv",
+   "point": 0.947,
+   "lo": 0.9285,
+   "hi": 0.9637,
+   "seed_min": 0.9448,
+   "seed_max": 0.9514
+  },
+  {
+   "subset": "leaked",
+   "cond": "delta",
+   "metric": "nv",
+   "point": 0.0817,
+   "lo": 0.0572,
+   "hi": 0.1037,
+   "seed_min": 0.0662,
+   "seed_max": 0.0971
+  },
+  {
+   "subset": "leaked",
+   "cond": "clean",
+   "metric": "vasc",
+   "point": 0.6852,
+   "lo": 0.4615,
+   "hi": 0.9,
+   "seed_min": 0.6111,
+   "seed_max": 0.7222
+  },
+  {
+   "subset": "leaked",
+   "cond": "leaky",
+   "metric": "vasc",
+   "point": 0.7963,
+   "lo": 0.619,
+   "hi": 0.9334,
+   "seed_min": 0.7222,
+   "seed_max": 0.8333
+  },
+  {
+   "subset": "leaked",
+   "cond": "delta",
+   "metric": "vasc",
+   "point": 0.1111,
+   "lo": -0.0889,
+   "hi": 0.3333,
+   "seed_min": 0.0,
+   "seed_max": 0.2222
+  },
+  {
+   "subset": "unleaked",
+   "cond": "clean",
+   "metric": "acc",
+   "point": 0.9061,
+   "lo": 0.8912,
+   "hi": 0.9221,
+   "seed_min": 0.9018,
+   "seed_max": 0.9096
+  },
+  {
+   "subset": "unleaked",
+   "cond": "leaky",
+   "metric": "acc",
+   "point": 0.9076,
+   "lo": 0.8921,
+   "hi": 0.9224,
+   "seed_min": 0.9035,
+   "seed_max": 0.9139
+  },
+  {
+   "subset": "unleaked",
+   "cond": "delta",
+   "metric": "acc",
+   "point": 0.0014,
+   "lo": -0.0079,
+   "hi": 0.0112,
+   "seed_min": -0.0043,
+   "seed_max": 0.0121
+  },
+  {
+   "subset": "unleaked",
+   "cond": "clean",
+   "metric": "bal_acc",
+   "point": 0.7557,
+   "lo": 0.7114,
+   "hi": 0.7996,
+   "seed_min": 0.7416,
+   "seed_max": 0.7648
+  },
+  {
+   "subset": "unleaked",
+   "cond": "leaky",
+   "metric": "bal_acc",
+   "point": 0.7385,
+   "lo": 0.6938,
+   "hi": 0.7766,
+   "seed_min": 0.7174,
+   "seed_max": 0.7631
+  },
+  {
+   "subset": "unleaked",
+   "cond": "delta",
+   "metric": "bal_acc",
+   "point": -0.0173,
+   "lo": -0.0476,
+   "hi": 0.0119,
+   "seed_min": -0.0473,
+   "seed_max": 0.0215
+  },
+  {
+   "subset": "unleaked",
+   "cond": "clean",
+   "metric": "akiec",
+   "point": 0.6357,
+   "lo": 0.5,
+   "hi": 0.762,
+   "seed_min": 0.6047,
+   "seed_max": 0.6512
+  },
+  {
+   "subset": "unleaked",
+   "cond": "leaky",
+   "metric": "akiec",
+   "point": 0.6667,
+   "lo": 0.5366,
+   "hi": 0.783,
+   "seed_min": 0.6047,
+   "seed_max": 0.7442
+  },
+  {
+   "subset": "unleaked",
+   "cond": "delta",
+   "metric": "akiec",
+   "point": 0.031,
+   "lo": -0.0567,
+   "hi": 0.1204,
+   "seed_min": -0.0465,
+   "seed_max": 0.1395
+  },
+  {
+   "subset": "unleaked",
+   "cond": "clean",
+   "metric": "bcc",
+   "point": 0.6981,
+   "lo": 0.5704,
+   "hi": 0.8194,
+   "seed_min": 0.6792,
+   "seed_max": 0.717
+  },
+  {
+   "subset": "unleaked",
+   "cond": "leaky",
+   "metric": "bcc",
+   "point": 0.673,
+   "lo": 0.5507,
+   "hi": 0.7867,
+   "seed_min": 0.566,
+   "seed_max": 0.7736
+  },
+  {
+   "subset": "unleaked",
+   "cond": "delta",
+   "metric": "bcc",
+   "point": -0.0252,
+   "lo": -0.1112,
+   "hi": 0.0566,
+   "seed_min": -0.1509,
+   "seed_max": 0.0943
+  },
+  {
+   "subset": "unleaked",
+   "cond": "clean",
+   "metric": "bkl",
+   "point": 0.7721,
+   "lo": 0.6966,
+   "hi": 0.8365,
+   "seed_min": 0.7347,
+   "seed_max": 0.7959
+  },
+  {
+   "subset": "unleaked",
+   "cond": "leaky",
+   "metric": "bkl",
+   "point": 0.7075,
+   "lo": 0.6321,
+   "hi": 0.7803,
+   "seed_min": 0.6837,
+   "seed_max": 0.7347
+  },
+  {
+   "subset": "unleaked",
+   "cond": "delta",
+   "metric": "bkl",
+   "point": -0.0646,
+   "lo": -0.1135,
+   "hi": -0.0156,
+   "seed_min": -0.102,
+   "seed_max": -0.0306
+  },
+  {
+   "subset": "unleaked",
+   "cond": "clean",
+   "metric": "df",
+   "point": 0.5965,
+   "lo": 0.3809,
+   "hi": 0.8021,
+   "seed_min": 0.5263,
+   "seed_max": 0.6842
+  },
+  {
+   "subset": "unleaked",
+   "cond": "leaky",
+   "metric": "df",
+   "point": 0.5614,
+   "lo": 0.3333,
+   "hi": 0.7593,
+   "seed_min": 0.4737,
+   "seed_max": 0.6316
+  },
+  {
+   "subset": "unleaked",
+   "cond": "delta",
+   "metric": "df",
+   "point": -0.0351,
+   "lo": -0.1885,
+   "hi": 0.0952,
+   "seed_min": -0.2105,
+   "seed_max": 0.0526
+  },
+  {
+   "subset": "unleaked",
+   "cond": "clean",
+   "metric": "mel",
+   "point": 0.6158,
+   "lo": 0.4848,
+   "hi": 0.7273,
+   "seed_min": 0.6102,
+   "seed_max": 0.6271
+  },
+  {
+   "subset": "unleaked",
+   "cond": "leaky",
+   "metric": "mel",
+   "point": 0.5763,
+   "lo": 0.4679,
+   "hi": 0.6857,
+   "seed_min": 0.5763,
+   "seed_max": 0.5763
+  },
+  {
+   "subset": "unleaked",
+   "cond": "delta",
+   "metric": "mel",
+   "point": -0.0395,
+   "lo": -0.1075,
+   "hi": 0.0238,
+   "seed_min": -0.0508,
+   "seed_max": -0.0339
+  },
+  {
+   "subset": "unleaked",
+   "cond": "clean",
+   "metric": "nv",
+   "point": 0.9719,
+   "lo": 0.9615,
+   "hi": 0.982,
+   "seed_min": 0.9681,
+   "seed_max": 0.9749
+  },
+  {
+   "subset": "unleaked",
+   "cond": "leaky",
+   "metric": "nv",
+   "point": 0.9844,
+   "lo": 0.9769,
+   "hi": 0.9912,
+   "seed_min": 0.984,
+   "seed_max": 0.9852
+  },
+  {
+   "subset": "unleaked",
+   "cond": "delta",
+   "metric": "nv",
+   "point": 0.0125,
+   "lo": 0.0061,
+   "hi": 0.0201,
+   "seed_min": 0.0091,
+   "seed_max": 0.0171
+  },
+  {
+   "subset": "unleaked",
+   "cond": "clean",
+   "metric": "vasc",
+   "point": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "seed_min": 1.0,
+   "seed_max": 1.0
+  },
+  {
+   "subset": "unleaked",
+   "cond": "leaky",
+   "metric": "vasc",
+   "point": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "seed_min": 1.0,
+   "seed_max": 1.0
+  },
+  {
+   "subset": "unleaked",
+   "cond": "delta",
+   "metric": "vasc",
+   "point": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "seed_min": 0.0,
+   "seed_max": 0.0
+  }
+ ]
+}

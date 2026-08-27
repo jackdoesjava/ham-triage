@@ -1,0 +1,1174 @@
+{
+ "n_images": 1512,
+ "class_counts": {
+  "akiec": 43,
+  "bcc": 93,
+  "bkl": 217,
+  "df": 44,
+  "mel": 171,
+  "nv": 909,
+  "vasc": 35
+ },
+ "alpha": 0.1,
+ "target_defer": 0.2,
+ "cost_model": {
+  "miss_mel": 100.0,
+  "miss_treat": 10.0,
+  "refer": 1.0,
+  "defer": 0.3,
+  "reader_sensitivity": 0.87,
+  "reader_specificity": 0.71
+ },
+ "n_boot": 1000,
+ "bootstrap_unit": "image (no lesion ids published)",
+ "groups": {
+  "leaky": {
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "n_cal": 838
+  },
+  "clean_size_matched": {
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "n_cal": 838
+  },
+  "full": {
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "n_cal": 896
+  }
+ },
+ "internal": {
+  "leaky": [
+   {
+    "metric": "acc",
+    "point": 0.8887,
+    "lo": 0.8765,
+    "hi": 0.9015
+   },
+   {
+    "metric": "bal_acc",
+    "point": 0.7708,
+    "lo": 0.7383,
+    "hi": 0.801
+   },
+   {
+    "metric": "akiec",
+    "point": 0.6948,
+    "lo": 0.6023,
+    "hi": 0.7895
+   },
+   {
+    "metric": "bcc",
+    "point": 0.7727,
+    "lo": 0.6936,
+    "hi": 0.845
+   },
+   {
+    "metric": "bkl",
+    "point": 0.733,
+    "lo": 0.682,
+    "hi": 0.7828
+   },
+   {
+    "metric": "df",
+    "point": 0.6552,
+    "lo": 0.5,
+    "hi": 0.8021
+   },
+   {
+    "metric": "mel",
+    "point": 0.6907,
+    "lo": 0.6391,
+    "hi": 0.7445
+   },
+   {
+    "metric": "nv",
+    "point": 0.9717,
+    "lo": 0.9633,
+    "hi": 0.979
+   },
+   {
+    "metric": "vasc",
+    "point": 0.8778,
+    "lo": 0.7658,
+    "hi": 0.9655
+   }
+  ],
+  "clean_size_matched": [
+   {
+    "metric": "acc",
+    "point": 0.8394,
+    "lo": 0.8254,
+    "hi": 0.8534
+   },
+   {
+    "metric": "bal_acc",
+    "point": 0.6902,
+    "lo": 0.6535,
+    "hi": 0.7278
+   },
+   {
+    "metric": "akiec",
+    "point": 0.615,
+    "lo": 0.5125,
+    "hi": 0.7161
+   },
+   {
+    "metric": "bcc",
+    "point": 0.7394,
+    "lo": 0.6638,
+    "hi": 0.8148
+   },
+   {
+    "metric": "bkl",
+    "point": 0.7046,
+    "lo": 0.6509,
+    "hi": 0.7573
+   },
+   {
+    "metric": "df",
+    "point": 0.4598,
+    "lo": 0.3067,
+    "hi": 0.6204
+   },
+   {
+    "metric": "mel",
+    "point": 0.5661,
+    "lo": 0.5057,
+    "hi": 0.6266
+   },
+   {
+    "metric": "nv",
+    "point": 0.9356,
+    "lo": 0.9235,
+    "hi": 0.947
+   },
+   {
+    "metric": "vasc",
+    "point": 0.8111,
+    "lo": 0.6552,
+    "hi": 0.9487
+   }
+  ],
+  "full": [
+   {
+    "metric": "acc",
+    "point": 0.8458,
+    "lo": 0.8279,
+    "hi": 0.8615
+   },
+   {
+    "metric": "bal_acc",
+    "point": 0.6892,
+    "lo": 0.6453,
+    "hi": 0.7364
+   },
+   {
+    "metric": "akiec",
+    "point": 0.5912,
+    "lo": 0.4714,
+    "hi": 0.6984
+   },
+   {
+    "metric": "bcc",
+    "point": 0.8758,
+    "lo": 0.8103,
+    "hi": 0.9351
+   },
+   {
+    "metric": "bkl",
+    "point": 0.6789,
+    "lo": 0.6176,
+    "hi": 0.7462
+   },
+   {
+    "metric": "df",
+    "point": 0.4812,
+    "lo": 0.348,
+    "hi": 0.6334
+   },
+   {
+    "metric": "mel",
+    "point": 0.5496,
+    "lo": 0.4825,
+    "hi": 0.616
+   },
+   {
+    "metric": "nv",
+    "point": 0.9476,
+    "lo": 0.9362,
+    "hi": 0.9585
+   },
+   {
+    "metric": "vasc",
+    "point": 0.7,
+    "lo": 0.4667,
+    "hi": 0.9334
+   }
+  ]
+ },
+ "table": [
+  {
+   "group": "leaky",
+   "metric": "acc",
+   "kind": "value",
+   "point": 0.8148,
+   "lo": 0.7989,
+   "hi": 0.8333,
+   "seed_min": 0.8049,
+   "seed_max": 0.828
+  },
+  {
+   "group": "leaky",
+   "metric": "bal_acc",
+   "kind": "value",
+   "point": 0.6349,
+   "lo": 0.6009,
+   "hi": 0.6705,
+   "seed_min": 0.6161,
+   "seed_max": 0.6554
+  },
+  {
+   "group": "leaky",
+   "metric": "akiec",
+   "kind": "value",
+   "point": 0.6589,
+   "lo": 0.525,
+   "hi": 0.7778,
+   "seed_min": 0.6047,
+   "seed_max": 0.7209
+  },
+  {
+   "group": "leaky",
+   "metric": "bcc",
+   "kind": "value",
+   "point": 0.7061,
+   "lo": 0.6296,
+   "hi": 0.7791,
+   "seed_min": 0.6452,
+   "seed_max": 0.7419
+  },
+  {
+   "group": "leaky",
+   "metric": "bkl",
+   "kind": "value",
+   "point": 0.6452,
+   "lo": 0.5927,
+   "hi": 0.703,
+   "seed_min": 0.5945,
+   "seed_max": 0.682
+  },
+  {
+   "group": "leaky",
+   "metric": "df",
+   "kind": "value",
+   "point": 0.5303,
+   "lo": 0.4167,
+   "hi": 0.6492,
+   "seed_min": 0.5227,
+   "seed_max": 0.5455
+  },
+  {
+   "group": "leaky",
+   "metric": "mel",
+   "kind": "value",
+   "point": 0.5731,
+   "lo": 0.512,
+   "hi": 0.6303,
+   "seed_min": 0.5146,
+   "seed_max": 0.6082
+  },
+  {
+   "group": "leaky",
+   "metric": "nv",
+   "kind": "value",
+   "point": 0.9498,
+   "lo": 0.9382,
+   "hi": 0.9604,
+   "seed_min": 0.9483,
+   "seed_max": 0.9516
+  },
+  {
+   "group": "leaky",
+   "metric": "vasc",
+   "kind": "value",
+   "point": 0.381,
+   "lo": 0.2432,
+   "hi": 0.5238,
+   "seed_min": 0.3714,
+   "seed_max": 0.4
+  },
+  {
+   "group": "leaky",
+   "metric": "nll_ts",
+   "kind": "value",
+   "point": 0.5475,
+   "lo": 0.4971,
+   "hi": 0.5977,
+   "seed_min": 0.529,
+   "seed_max": 0.5606
+  },
+  {
+   "group": "leaky",
+   "metric": "aps_coverage",
+   "kind": "value",
+   "point": 0.886,
+   "lo": 0.8732,
+   "hi": 0.8997,
+   "seed_min": 0.875,
+   "seed_max": 0.8942
+  },
+  {
+   "group": "leaky",
+   "metric": "aps_set_size",
+   "kind": "value",
+   "point": 1.5174,
+   "lo": 1.4755,
+   "hi": 1.5578,
+   "seed_min": 1.4484,
+   "seed_max": 1.5681
+  },
+  {
+   "group": "leaky",
+   "metric": "aps_cov_mel",
+   "kind": "value",
+   "point": 0.7973,
+   "lo": 0.7476,
+   "hi": 0.8471,
+   "seed_min": 0.7719,
+   "seed_max": 0.8304
+  },
+  {
+   "group": "leaky",
+   "metric": "mel_rule_sensitivity",
+   "kind": "value",
+   "point": 0.8694,
+   "lo": 0.8272,
+   "hi": 0.9096,
+   "seed_min": 0.8421,
+   "seed_max": 0.9064
+  },
+  {
+   "group": "leaky",
+   "metric": "mel_rule_flag_rate_non_mel",
+   "kind": "value",
+   "point": 0.2578,
+   "lo": 0.2363,
+   "hi": 0.2765,
+   "seed_min": 0.22,
+   "seed_max": 0.3117
+  },
+  {
+   "group": "leaky",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.2354,
+   "lo": 0.2189,
+   "hi": 0.25,
+   "seed_min": 0.2308,
+   "seed_max": 0.2388
+  },
+  {
+   "group": "leaky",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.4308,
+   "lo": 0.4087,
+   "hi": 0.4531,
+   "seed_min": 0.414,
+   "seed_max": 0.4504
+  },
+  {
+   "group": "leaky",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.03,
+   "lo": 0.0138,
+   "hi": 0.0482,
+   "seed_min": 0.0246,
+   "seed_max": 0.034
+  },
+  {
+   "group": "leaky",
+   "metric": "cost",
+   "kind": "value",
+   "point": 0.9241,
+   "lo": 0.7367,
+   "hi": 1.1589,
+   "seed_min": 0.8553,
+   "seed_max": 0.9915
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "acc",
+   "kind": "value",
+   "point": 0.8086,
+   "lo": 0.7914,
+   "hi": 0.8267,
+   "seed_min": 0.8009,
+   "seed_max": 0.8142
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "bal_acc",
+   "kind": "value",
+   "point": 0.6517,
+   "lo": 0.6141,
+   "hi": 0.6897,
+   "seed_min": 0.6257,
+   "seed_max": 0.6802
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "akiec",
+   "kind": "value",
+   "point": 0.6589,
+   "lo": 0.5348,
+   "hi": 0.7778,
+   "seed_min": 0.6047,
+   "seed_max": 0.7209
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "bcc",
+   "kind": "value",
+   "point": 0.7061,
+   "lo": 0.6262,
+   "hi": 0.7791,
+   "seed_min": 0.6774,
+   "seed_max": 0.7204
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "bkl",
+   "kind": "value",
+   "point": 0.682,
+   "lo": 0.6294,
+   "hi": 0.7333,
+   "seed_min": 0.659,
+   "seed_max": 0.7005
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "df",
+   "kind": "value",
+   "point": 0.5682,
+   "lo": 0.442,
+   "hi": 0.6918,
+   "seed_min": 0.4773,
+   "seed_max": 0.6591
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "mel",
+   "kind": "value",
+   "point": 0.5497,
+   "lo": 0.4898,
+   "hi": 0.6126,
+   "seed_min": 0.5439,
+   "seed_max": 0.5556
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "nv",
+   "kind": "value",
+   "point": 0.93,
+   "lo": 0.9161,
+   "hi": 0.9434,
+   "seed_min": 0.9252,
+   "seed_max": 0.934
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "vasc",
+   "kind": "value",
+   "point": 0.4667,
+   "lo": 0.3248,
+   "hi": 0.625,
+   "seed_min": 0.4286,
+   "seed_max": 0.4857
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "nll_ts",
+   "kind": "value",
+   "point": 0.5481,
+   "lo": 0.4988,
+   "hi": 0.5962,
+   "seed_min": 0.5175,
+   "seed_max": 0.5675
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "aps_coverage",
+   "kind": "value",
+   "point": 0.8937,
+   "lo": 0.8807,
+   "hi": 0.9074,
+   "seed_min": 0.8862,
+   "seed_max": 0.9034
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "aps_set_size",
+   "kind": "value",
+   "point": 1.554,
+   "lo": 1.5101,
+   "hi": 1.5977,
+   "seed_min": 1.5007,
+   "seed_max": 1.6442
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "aps_cov_mel",
+   "kind": "value",
+   "point": 0.8285,
+   "lo": 0.781,
+   "hi": 0.8733,
+   "seed_min": 0.807,
+   "seed_max": 0.8655
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "mel_rule_sensitivity",
+   "kind": "value",
+   "point": 0.9064,
+   "lo": 0.8693,
+   "hi": 0.9403,
+   "seed_min": 0.8713,
+   "seed_max": 0.9357
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "mel_rule_flag_rate_non_mel",
+   "kind": "value",
+   "point": 0.261,
+   "lo": 0.2418,
+   "hi": 0.2806,
+   "seed_min": 0.223,
+   "seed_max": 0.3229
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.2493,
+   "lo": 0.2324,
+   "hi": 0.2643,
+   "seed_min": 0.2335,
+   "seed_max": 0.2606
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.4134,
+   "lo": 0.392,
+   "hi": 0.4354,
+   "seed_min": 0.3889,
+   "seed_max": 0.4511
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0245,
+   "lo": 0.01,
+   "hi": 0.0419,
+   "seed_min": 0.0203,
+   "seed_max": 0.0287
+  },
+  {
+   "group": "clean_size_matched",
+   "metric": "cost",
+   "kind": "value",
+   "point": 0.8512,
+   "lo": 0.6852,
+   "hi": 1.061,
+   "seed_min": 0.7842,
+   "seed_max": 0.9237
+  },
+  {
+   "group": "full",
+   "metric": "acc",
+   "kind": "value",
+   "point": 0.813,
+   "lo": 0.7967,
+   "hi": 0.8292,
+   "seed_min": 0.8102,
+   "seed_max": 0.8168
+  },
+  {
+   "group": "full",
+   "metric": "bal_acc",
+   "kind": "value",
+   "point": 0.6542,
+   "lo": 0.622,
+   "hi": 0.6872,
+   "seed_min": 0.632,
+   "seed_max": 0.6712
+  },
+  {
+   "group": "full",
+   "metric": "akiec",
+   "kind": "value",
+   "point": 0.6837,
+   "lo": 0.5681,
+   "hi": 0.8044,
+   "seed_min": 0.6279,
+   "seed_max": 0.7907
+  },
+  {
+   "group": "full",
+   "metric": "bcc",
+   "kind": "value",
+   "point": 0.7333,
+   "lo": 0.6639,
+   "hi": 0.8022,
+   "seed_min": 0.6882,
+   "seed_max": 0.7634
+  },
+  {
+   "group": "full",
+   "metric": "bkl",
+   "kind": "value",
+   "point": 0.6737,
+   "lo": 0.6214,
+   "hi": 0.7241,
+   "seed_min": 0.6452,
+   "seed_max": 0.7189
+  },
+  {
+   "group": "full",
+   "metric": "df",
+   "kind": "value",
+   "point": 0.4682,
+   "lo": 0.3532,
+   "hi": 0.5827,
+   "seed_min": 0.3864,
+   "seed_max": 0.5227
+  },
+  {
+   "group": "full",
+   "metric": "mel",
+   "kind": "value",
+   "point": 0.586,
+   "lo": 0.5271,
+   "hi": 0.6441,
+   "seed_min": 0.5614,
+   "seed_max": 0.6082
+  },
+  {
+   "group": "full",
+   "metric": "nv",
+   "kind": "value",
+   "point": 0.9318,
+   "lo": 0.9189,
+   "hi": 0.9435,
+   "seed_min": 0.9219,
+   "seed_max": 0.9395
+  },
+  {
+   "group": "full",
+   "metric": "vasc",
+   "kind": "value",
+   "point": 0.5029,
+   "lo": 0.3714,
+   "hi": 0.6333,
+   "seed_min": 0.3714,
+   "seed_max": 0.6
+  },
+  {
+   "group": "full",
+   "metric": "nll_ts",
+   "kind": "value",
+   "point": 0.5377,
+   "lo": 0.4909,
+   "hi": 0.5824,
+   "seed_min": 0.5257,
+   "seed_max": 0.5544
+  },
+  {
+   "group": "full",
+   "metric": "aps_coverage",
+   "kind": "value",
+   "point": 0.8889,
+   "lo": 0.8751,
+   "hi": 0.9023,
+   "seed_min": 0.8823,
+   "seed_max": 0.8988
+  },
+  {
+   "group": "full",
+   "metric": "aps_set_size",
+   "kind": "value",
+   "point": 1.5114,
+   "lo": 1.4693,
+   "hi": 1.5509,
+   "seed_min": 1.4683,
+   "seed_max": 1.5952
+  },
+  {
+   "group": "full",
+   "metric": "aps_cov_mel",
+   "kind": "value",
+   "point": 0.8152,
+   "lo": 0.7671,
+   "hi": 0.8602,
+   "seed_min": 0.7836,
+   "seed_max": 0.8304
+  },
+  {
+   "group": "full",
+   "metric": "mel_rule_sensitivity",
+   "kind": "value",
+   "point": 0.8912,
+   "lo": 0.8522,
+   "hi": 0.9283,
+   "seed_min": 0.8713,
+   "seed_max": 0.9064
+  },
+  {
+   "group": "full",
+   "metric": "mel_rule_flag_rate_non_mel",
+   "kind": "value",
+   "point": 0.2264,
+   "lo": 0.2078,
+   "hi": 0.2446,
+   "seed_min": 0.1991,
+   "seed_max": 0.2811
+  },
+  {
+   "group": "full",
+   "metric": "defer_rate",
+   "kind": "value",
+   "point": 0.2216,
+   "lo": 0.2066,
+   "hi": 0.2349,
+   "seed_min": 0.203,
+   "seed_max": 0.2335
+  },
+  {
+   "group": "full",
+   "metric": "refer_rate",
+   "kind": "value",
+   "point": 0.4444,
+   "lo": 0.423,
+   "hi": 0.4656,
+   "seed_min": 0.4266,
+   "seed_max": 0.4802
+  },
+  {
+   "group": "full",
+   "metric": "mel_miss_rate",
+   "kind": "value",
+   "point": 0.0173,
+   "lo": 0.0081,
+   "hi": 0.0265,
+   "seed_min": 0.0084,
+   "seed_max": 0.0274
+  },
+  {
+   "group": "full",
+   "metric": "cost",
+   "kind": "value",
+   "point": 0.7822,
+   "lo": 0.6743,
+   "hi": 0.8994,
+   "seed_min": 0.7095,
+   "seed_max": 0.8874
+  },
+  {
+   "group": "leaky",
+   "metric": "acc",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0062,
+   "lo": -0.0046,
+   "hi": 0.0174,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "bal_acc",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0168,
+   "lo": -0.0431,
+   "hi": 0.0102,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "akiec",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0,
+   "lo": -0.086,
+   "hi": 0.0778,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "bcc",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0,
+   "lo": -0.0603,
+   "hi": 0.0562,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "bkl",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0369,
+   "lo": -0.0686,
+   "hi": -0.0047,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "df",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0379,
+   "lo": -0.127,
+   "hi": 0.0521,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "mel",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0234,
+   "lo": -0.0278,
+   "hi": 0.0741,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "nv",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0198,
+   "lo": 0.0097,
+   "hi": 0.0304,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "vasc",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0857,
+   "lo": -0.1936,
+   "hi": 0.023,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "nll_ts",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0006,
+   "lo": -0.0242,
+   "hi": 0.0242,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "aps_coverage",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0077,
+   "lo": -0.0172,
+   "hi": 0.0011,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "aps_set_size",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0366,
+   "lo": -0.06,
+   "hi": -0.013,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "aps_cov_mel",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0312,
+   "lo": -0.0748,
+   "hi": 0.0103,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "mel_rule_sensitivity",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.037,
+   "lo": -0.0686,
+   "hi": -0.0078,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "mel_rule_flag_rate_non_mel",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0032,
+   "lo": -0.0188,
+   "hi": 0.0102,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "defer_rate",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0139,
+   "lo": -0.0282,
+   "hi": 0.0022,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "refer_rate",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0174,
+   "lo": 0.0037,
+   "hi": 0.0298,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0055,
+   "lo": -0.0058,
+   "hi": 0.0168,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "leaky",
+   "metric": "cost",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0729,
+   "lo": -0.055,
+   "hi": 0.2058,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "acc",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0043,
+   "lo": -0.007,
+   "hi": 0.0154,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "bal_acc",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0026,
+   "lo": -0.0247,
+   "hi": 0.0312,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "akiec",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0248,
+   "lo": -0.0667,
+   "hi": 0.1218,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "bcc",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0272,
+   "lo": -0.0264,
+   "hi": 0.0877,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "bkl",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0083,
+   "lo": -0.0418,
+   "hi": 0.0239,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "df",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.1,
+   "lo": -0.203,
+   "hi": 0.0001,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "mel",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0363,
+   "lo": -0.0123,
+   "hi": 0.0839,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "nv",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0018,
+   "lo": -0.0082,
+   "hi": 0.0123,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "vasc",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0362,
+   "lo": -0.0648,
+   "hi": 0.1333,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "nll_ts",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0104,
+   "lo": -0.0343,
+   "hi": 0.0136,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "aps_coverage",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0049,
+   "lo": -0.0139,
+   "hi": 0.0036,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "aps_set_size",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0426,
+   "lo": -0.0675,
+   "hi": -0.021,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "aps_cov_mel",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0133,
+   "lo": -0.0517,
+   "hi": 0.0222,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "mel_rule_sensitivity",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0152,
+   "lo": -0.0437,
+   "hi": 0.0113,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "mel_rule_flag_rate_non_mel",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0346,
+   "lo": -0.0478,
+   "hi": -0.0214,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "defer_rate",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0278,
+   "lo": -0.0406,
+   "hi": -0.013,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "refer_rate",
+   "kind": "delta_vs_clean_size_matched",
+   "point": 0.0311,
+   "lo": 0.0183,
+   "hi": 0.0425,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "mel_miss_rate",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0072,
+   "lo": -0.0219,
+   "hi": 0.0061,
+   "seed_min": NaN,
+   "seed_max": NaN
+  },
+  {
+   "group": "full",
+   "metric": "cost",
+   "kind": "delta_vs_clean_size_matched",
+   "point": -0.0689,
+   "lo": -0.2338,
+   "hi": 0.0766,
+   "seed_min": NaN,
+   "seed_max": NaN
+  }
+ ]
+}

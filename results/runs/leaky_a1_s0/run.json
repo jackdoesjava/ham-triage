@@ -1,0 +1,51 @@
+{
+ "run_id": "leaky_a1_s0",
+ "seed": 0,
+ "split": "audit_s1",
+ "train_col": "leaky_train",
+ "n_train": 5965,
+ "config": {
+  "model": "efficientnet_b0",
+  "epochs": 15,
+  "batch_size": 32,
+  "lr": 0.0003,
+  "weight_decay": 0.01,
+  "warmup_epochs": 1,
+  "crop": 224,
+  "drop_rate": 0.2,
+  "drop_path_rate": 0.1,
+  "amp": true,
+  "loss": "ce"
+ },
+ "classes": [
+  "akiec",
+  "bcc",
+  "bkl",
+  "df",
+  "mel",
+  "nv",
+  "vasc"
+ ],
+ "train_loss": [
+  1.615128509780412,
+  0.6316157565802656,
+  0.5102946210292078,
+  0.3985041023822882,
+  0.34087239638451605,
+  0.29126226495430674,
+  0.24709452572529034,
+  0.20278569993873438,
+  0.159158512699588,
+  0.13184748252262912,
+  0.111459640525682,
+  0.0956817650266232,
+  0.0843339585023181,
+  0.07520659877267737,
+  0.06591585852075568
+ ],
+ "minutes": 17.6,
+ "torch": "2.11.0+cu126",
+ "timm": "1.0.28",
+ "pretrained": "timm/efficientnet_b0.ra_in1k",
+ "device": "NVIDIA GeForce GTX 1050 Ti"
+}

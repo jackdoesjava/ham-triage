@@ -1,6 +1,7 @@
 import argparse
 import json
 import math
+import os
 import time
 from dataclasses import asdict, replace
 
@@ -49,6 +50,14 @@ def build_model(cfg: TrainConfig) -> torch.nn.Module:
                              drop_rate=cfg.drop_rate, drop_path_rate=cfg.drop_path_rate)
 
 
+def class_weights(train_labels: np.ndarray, beta: float = 0.9999) -> torch.Tensor:
+    # Cui et al. 2019, weight by inverse effective number of samples; at this beta it is
+    # close to inverse frequency (nv:df about 1:53), normalised to mean 1 over classes
+    counts = np.bincount(train_labels, minlength=len(CLASSES))
+    w = (1 - beta) / (1 - beta ** counts)
+    return torch.tensor(w / w.mean(), dtype=torch.float32)
+
+
 def train(cfg: TrainConfig, images: np.ndarray, labels: np.ndarray, train_idx: np.ndarray,
           seed: int, device: str = "cuda"):
     torch.manual_seed(seed)
@@ -67,6 +76,8 @@ def train(cfg: TrainConfig, images: np.ndarray, labels: np.ndarray, train_idx: n
 
     sched = torch.optim.lr_scheduler.LambdaLR(opt, lr_at)
     scaler = torch.amp.GradScaler(enabled=cfg.amp)
+    assert cfg.loss in ("ce", "cb"), cfg.loss
+    weight = class_weights(labels[train_idx]).to(device) if cfg.loss == "cb" else None
     rng = np.random.default_rng(seed)
     curve = []
     t0 = time.time()
@@ -78,9 +89,9 @@ def train(cfg: TrainConfig, images: np.ndarray, labels: np.ndarray, train_idx: n
             idx = np.sort(order[i * cfg.batch_size:(i + 1) * cfg.batch_size])
             x = torch.from_numpy(images[idx]).to(device, non_blocking=True)
             y = torch.from_numpy(labels[idx]).to(device)
-            with torch.autocast("cuda", dtype=torch.float16, enabled=cfg.amp):
+            with torch.autocast(device, dtype=torch.float16, enabled=cfg.amp):
                 logits = model(to_input(x, cfg.crop, train=True))
-            loss = F.cross_entropy(logits.float(), y)
+            loss = F.cross_entropy(logits.float(), y, weight=weight)
             opt.zero_grad(set_to_none=True)
             scaler.scale(loss).backward()
             scaler.step(opt)
@@ -113,10 +124,15 @@ def main():
     p.add_argument("--run-id", required=True)
     p.add_argument("--loss", default="ce")
     p.add_argument("--epochs", type=int)
+    p.add_argument("--device", default="cuda")
     args = p.parse_args()
     cfg = TrainConfig(loss=args.loss)
     if args.epochs:
         cfg = replace(cfg, epochs=args.epochs)
+    if args.device == "cpu":
+        # fp16 autocast is CUDA-only; a CPU run is the same recipe in fp32, about ten times slower
+        cfg = replace(cfg, amp=False)
+        torch.set_num_threads(max(1, os.cpu_count() // 2))
 
     paths = Paths()
     images, meta = load_cache(paths)
@@ -126,8 +142,8 @@ def main():
     labels = meta.label.values.astype(np.int64)
 
     t0 = time.time()
-    model, curve = train(cfg, images, labels, train_idx, args.seed)
-    logits = predict(model, images, cfg)
+    model, curve = train(cfg, images, labels, train_idx, args.seed, args.device)
+    logits = predict(model, images, cfg, args.device)
 
     run_dir = paths.results / "runs" / args.run_id
     run_dir.mkdir(parents=True, exist_ok=True)
@@ -141,7 +157,8 @@ def main():
         "n_train": int(len(train_idx)), "config": asdict(cfg), "classes": list(CLASSES),
         "train_loss": curve, "minutes": minutes,
         "torch": torch.__version__, "timm": timm.__version__,
-        "pretrained": model.pretrained_cfg.get("hf_hub_id"), "device": torch.cuda.get_device_name(0),
+        "pretrained": model.pretrained_cfg.get("hf_hub_id"),
+        "device": torch.cuda.get_device_name(0) if args.device == "cuda" else f"cpu ({os.cpu_count()} logical cores)",
     }
     with open(run_dir / "run.json", "w") as f:
         json.dump(info, f, indent=1)

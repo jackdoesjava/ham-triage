@@ -20,7 +20,11 @@ class CostModel:
     miss_treat: float = 10.0  # bcc, akiec: needs excision, very rarely lethal
     refer: float = 1.0
     defer: float = 0.3  # a remote read of the image, cheaper than an in-person visit
-    reader_sensitivity: float = 0.87  # Haenssle et al. 2018, dermatologists on dermoscopy
+    # Haenssle et al. 2018, dermatologists reading dermoscopy alone: 86.6% sensitivity,
+    # 71.3% specificity. A deferred benign lesion is referred by the reader about a
+    # third of the time; a deferred malignant one is missed about one time in eight
+    reader_sensitivity: float = 0.87
+    reader_specificity: float = 0.71
 
 
 def miss_costs(cm: CostModel) -> np.ndarray:
@@ -30,51 +34,56 @@ def miss_costs(cm: CostModel) -> np.ndarray:
     return m
 
 
+def cost_matrix(cm: CostModel) -> np.ndarray:
+    """C[y, a]: the cost of action a when the true class is y (Elkan 2001).
+
+        discharge   the miss cost m_y, zero for benign classes
+        refer       one referral, whoever the patient is; the case is resolved
+        defer       the read itself, then whatever the reader decides: a benign lesion
+                    is referred with probability 1 - specificity, a treated one is
+                    referred with probability sensitivity and missed otherwise
+
+    The expected cost of every action is linear in the posterior, so the Bayes rule
+    is argmin over probs @ C. Deferring is worth it in the middle: below the read
+    price a discharge is cheaper, and once p(treat) exceeds 1 - defer / refer the
+    read is wasted because the reader will refer anyway. With defer = inf it is the
+    two-action rule, refer iff the expected miss cost exceeds one referral, which
+    for miss costs of two referrals is the argmax of the binary problem. Chow 1970
+    is not a member of this family (a flat referral price is not a 0-1 loss); it
+    is the max-softmax baseline in defer_by_score.
+    """
+    m = miss_costs(cm)
+    treat = m > 0
+    deferred = np.where(treat, cm.reader_sensitivity * cm.refer + (1 - cm.reader_sensitivity) * m,
+                        (1 - cm.reader_specificity) * cm.refer)
+    return np.stack([m, np.full_like(m, cm.refer), cm.defer + deferred], axis=1)
+
+
 def expected_miss(probs: np.ndarray, cm: CostModel) -> np.ndarray:
     return probs @ miss_costs(cm)
 
 
 def bayes_actions(probs: np.ndarray, cm: CostModel, defer_knob: float | None = None) -> np.ndarray:
-    """Expected-cost-minimising action among discharge, refer and defer to a human reader.
-
-    With s(x) = sum_y p(y|x) m_y the expected miss cost, the three expected costs are
-        discharge: s(x)
-        refer:     refer  (the visit is paid whoever the patient is; the case is resolved)
-        defer:     defer + (1 - reader_sensitivity) * s(x)
-    so every policy in this family is two thresholds on s(x): discharge below
-    defer / r, defer up to (refer - defer) / (1 - r), refer above. With a perfect
-    reader (r = 1) and defer < refer the refer region vanishes and the rule is the
-    rule-out triage of Leibig et al. 2022. With defer_knob = inf it is the two-action
-    rule, refer iff s(x) >= refer, which with miss costs of two referrals is the
-    argmax of the binary problem. Chow 1970 is not a special case of this family (a
-    flat referral cost is not a 0-1 loss); it is the MSP baseline in defer_by_score.
-
-    defer_knob replaces the defer price in the decision only, to trace the frontier
-    at deferral rates other than the cost-optimal one; realised and expected costs
-    always use the true cm.defer.
-    """
-    d = cm.defer if defer_knob is None else defer_knob
-    s = expected_miss(probs, cm)
-    cost = np.stack([s, np.full_like(s, cm.refer), d + (1 - cm.reader_sensitivity) * s], axis=1)
-    return cost.argmin(axis=1)
-
-
-def action_costs(y: np.ndarray, cm: CostModel) -> np.ndarray:
-    # [n, 3] cost of each action given the true class; the reader's miss is taken in
-    # expectation over their sensitivity rather than simulated
-    m = miss_costs(cm)[y]
-    return np.stack([m, np.full_like(m, cm.refer), cm.defer + (1 - cm.reader_sensitivity) * m], axis=1)
+    # defer_knob replaces the defer price in the decision only, to trace the frontier at
+    # deferral rates other than the cost-optimal one; costs are always paid at cm.defer
+    c = cost_matrix(cm)
+    if defer_knob is None:
+        return (probs @ c).argmin(axis=1)
+    if np.isinf(defer_knob):
+        return (probs @ c[:, :DEFER]).argmin(axis=1)  # 0 * inf is nan, so drop the column instead
+    c = c.copy()
+    c[:, DEFER] += defer_knob - cm.defer
+    return (probs @ c).argmin(axis=1)
 
 
 def realized_cost(actions: np.ndarray, y: np.ndarray, cm: CostModel) -> np.ndarray:
-    return action_costs(y, cm)[np.arange(len(y)), actions]
+    return cost_matrix(cm)[y, actions]
 
 
 def expected_cost(actions: np.ndarray, probs: np.ndarray, cm: CostModel) -> np.ndarray:
     # the cost the model itself expects to pay; its gap to realized_cost is the
     # decision-level price of miscalibration
-    per_class = np.stack([action_costs(np.full(len(probs), k), cm) for k in range(len(CLASSES))], axis=1)
-    return np.einsum("nk,nka->na", probs, per_class)[np.arange(len(probs)), actions]
+    return (probs @ cost_matrix(cm))[np.arange(len(probs)), actions]
 
 
 def defer_by_score(score: np.ndarray, threshold: float, probs: np.ndarray, cm: CostModel) -> np.ndarray:
@@ -91,6 +100,18 @@ def melanoma_miss_weight(actions: np.ndarray, cm: CostModel) -> np.ndarray:
     return np.where(actions == DISCHARGE, 1.0, np.where(actions == DEFER, 1 - cm.reader_sensitivity, 0.0))
 
 
+def net_benefit(p_treat: np.ndarray, treat: np.ndarray, thresholds: np.ndarray) -> np.ndarray:
+    # Vickers and Elkin 2006: benefit of "refer iff p >= p_t" in true positives per
+    # patient, with false positives weighted by the odds a clinician at threshold
+    # p_t implicitly assigns them. The usual clinical view of the same trade-off.
+    n = len(treat)
+    out = []
+    for t in thresholds:
+        flag = p_treat >= t
+        out.append((flag & treat).sum() / n - (flag & ~treat).sum() / n * t / (1 - t))
+    return np.array(out)
+
+
 def prior_shift(probs: np.ndarray, train_prior: np.ndarray, deploy_prior: np.ndarray) -> np.ndarray:
     # Saerens et al. 2002: a posterior learned under one class prior is turned into
     # the posterior under another by reweighting and renormalising
@@ -99,7 +120,7 @@ def prior_shift(probs: np.ndarray, train_prior: np.ndarray, deploy_prior: np.nda
 
 
 def ensemble_mutual_information(logits_by_seed: list[np.ndarray], temperatures: list[float]) -> np.ndarray:
-    # the three training seeds are a free deep ensemble; MI between the label and the
+    # the training seeds are a free deep ensemble; MI between the label and the
     # ensemble member is the standard epistemic score (Lakshminarayanan et al. 2017)
     log_p = np.stack([log_softmax(z / t, axis=1) for z, t in zip(logits_by_seed, temperatures)])
     p = np.exp(log_p)

@@ -1,9 +1,9 @@
 import numpy as np
 
 from ham_triage.config import CLASSES
-from ham_triage.decision import (DEFER, DISCHARGE, MEL, REFER, CostModel, bayes_actions, defer_by_score,
-                                 ensemble_mutual_information, expected_cost, expected_miss, prior_shift,
-                                 realized_cost, risk_coverage)
+from ham_triage.decision import (DEFER, DISCHARGE, MEL, REFER, CostModel, bayes_actions, cost_matrix, defer_by_score,
+                                 ensemble_mutual_information, expected_cost, net_benefit, prior_shift, realized_cost,
+                                 risk_coverage)
 
 NV = CLASSES.index("nv")
 
@@ -23,21 +23,20 @@ def test_two_action_rule_is_binary_argmax_when_a_miss_costs_two_referrals():
     assert DEFER not in actions
 
 
-def test_three_regions_are_the_documented_thresholds():
-    cm = CostModel(miss_mel=100, miss_treat=10, refer=1, defer=0.3, reader_sensitivity=0.87)
-    probs = mel_vs_nv(np.linspace(0, 0.2, 2001))
-    s = expected_miss(probs, cm)
+def test_actions_are_contiguous_regions_in_p_mel_and_match_the_matrix():
+    cm = CostModel()
+    p = np.linspace(0, 1, 5001)
+    probs = mel_vs_nv(p)
     actions = bayes_actions(probs, cm)
-    lo, hi = cm.defer / cm.reader_sensitivity, (cm.refer - cm.defer) / (1 - cm.reader_sensitivity)
-    assert np.array_equal(actions == DISCHARGE, s < lo)
-    assert np.array_equal(actions == DEFER, (s >= lo) & (s < hi))
-    assert np.array_equal(actions == REFER, s >= hi)
-
-
-def test_perfect_reader_never_refers_when_deferral_is_cheaper():
-    cm = CostModel(reader_sensitivity=1.0, defer=0.3)
-    actions = bayes_actions(mel_vs_nv(np.linspace(0, 1, 50)), cm)
-    assert REFER not in actions and DEFER in actions and DISCHARGE in actions
+    assert np.array_equal(actions, (probs @ cost_matrix(cm)).argmin(axis=1))
+    changes = np.flatnonzero(np.diff(actions))
+    assert list(actions[np.r_[0, changes + 1]]) == [DISCHARGE, DEFER, REFER]
+    # a perfect reader does not remove the refer region: a deferred malignant still ends in
+    # a referral once flagged, so the read is wasted above p = 1 - defer / refer
+    perfect = CostModel(reader_sensitivity=1.0, reader_specificity=1.0)
+    a = bayes_actions(probs, perfect)
+    assert np.allclose(p[a == REFER].min(), 1 - perfect.defer / perfect.refer, atol=1e-3)
+    assert np.allclose(p[a == DISCHARGE].max(), perfect.defer / (perfect.miss_mel - perfect.refer), atol=1e-3)
 
 
 def test_defer_by_score_with_msp_is_chow():
@@ -57,7 +56,19 @@ def test_expected_equals_realized_for_one_hot_posteriors():
     cm = CostModel()
     for actions in (np.full(4, DISCHARGE), np.full(4, REFER), np.full(4, DEFER)):
         assert np.allclose(expected_cost(actions, probs, cm), realized_cost(actions, y, cm))
-    assert np.isclose(realized_cost(np.array([DEFER]), np.array([MEL]), cm)[0], 0.3 + 0.13 * 100)
+    deferred_mel = cm.defer + cm.reader_sensitivity * cm.refer + (1 - cm.reader_sensitivity) * cm.miss_mel
+    deferred_nv = cm.defer + (1 - cm.reader_specificity) * cm.refer
+    assert np.isclose(realized_cost(np.array([DEFER]), np.array([MEL]), cm)[0], deferred_mel)
+    assert np.isclose(realized_cost(np.array([DEFER]), np.array([NV]), cm)[0], deferred_nv)
+
+
+def test_net_benefit_endpoints():
+    treat = np.array([1, 1, 0, 0, 0, 0, 0, 0, 0, 0], dtype=bool)
+    p = np.where(treat, 0.9, 0.1)
+    nb = net_benefit(p, treat, np.array([0.05, 0.5]))
+    assert np.isclose(nb[1], 0.2)  # perfect separation at p_t = 0.5: all TP, no FP
+    assert np.isclose(nb[0], 0.2 - 0.8 * 0.05 / 0.95)  # at p_t = 0.05 everyone is flagged
+    assert net_benefit(p, treat, np.array([0.95]))[0] == 0  # nobody referred
 
 
 def test_prior_shift_and_ensemble_mi():

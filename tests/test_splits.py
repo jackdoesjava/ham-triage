@@ -3,7 +3,7 @@ import pandas as pd
 import pytest
 
 from ham_triage.config import Paths
-from ham_triage.splits import audit_split, image_level_split
+from ham_triage.splits import audit_split, image_level_split, lesion_level_split
 
 
 @pytest.fixture(scope="module")
@@ -51,3 +51,13 @@ def test_test_set_is_the_naive_one(meta, split):
 def test_masks_are_disjoint_and_dx_is_constant_within_lesion(meta, split):
     assert (split[["test", "cal", "clean_train"]].sum(axis=1) <= 1).all()
     assert (meta.groupby("lesion_id").dx.nunique() == 1).all()
+
+
+def test_lesion_level_split_is_grouped_on_both_sides(meta):
+    split = lesion_level_split(meta, seed=0)
+    train, cal, test = (lesions(meta, split[c]) for c in ("train", "cal", "test"))
+    assert not train & cal and not train & test and not cal & test
+    assert meta.lesion_id[split.cal].is_unique
+    assert (split[["train", "cal", "test"]].sum(axis=1) <= 1).all()
+    # test keeps every image of its lesions; the audit split is the only one that does not
+    assert meta.lesion_id.isin(test).sum() == split.test.sum()

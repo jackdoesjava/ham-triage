@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import beta
 
-from .analyse import load_runs, load_test
 from .config import CLASSES, Paths
+from .reports.common import load_runs, load_split
 
 # one fixed colour per policy, never assigned by rank; the five were checked for
 # colour-vision-deficiency separation as a set
@@ -98,13 +98,13 @@ def frontier(paths: Paths, out):
     ends = cv["random_endpoints"]
     ax.plot(ends[:, i_def], ends[:, i_cost], color=GREY, ls="--", lw=1.2, label="random deferral")
     ax.axhline(cm["refer"], color=AXIS, lw=0.8, zorder=0)
-    ax.text(0.30, cm["refer"] - 0.02, "refer everyone", ha="left", va="top", fontsize=7, color=MUTED)
+    ax.text(0.60, cm["refer"] + 0.02, "refer everyone", ha="left", va="bottom", fontsize=7, color=MUTED)
     ax.set_xlabel("fraction deferred to a human reader")
     ax.set_ylabel("realised cost per image (referrals)")
-    ax.set_title(f"miss mel = {cm['miss_mel']:.0f}, reader sensitivity {cm['reader_sensitivity']}")
+    ax.set_title(f"miss mel = {cm['miss_mel']:.0f}, reader {cm['reader_sensitivity']} sens / {cm['reader_specificity']} spec")
     ax.set_xlim(0, 0.9)
     ax.legend(loc="upper left")
-    ax.text(0.98, 0.30, "the cost rule refers anything above\nthe reader threshold, so it cannot\ndefer more than about 60%",
+    ax.text(0.98, 0.08, "the cost rule defers only where a read\nbeats both discharge and referral,\nso its curve stops early",
             transform=ax.transAxes, ha="right", va="bottom", fontsize=6.5, color=MUTED)
 
     ax = axes[1]
@@ -138,8 +138,28 @@ def frontier(paths: Paths, out):
     plt.close(fig)
 
 
+def decision_curve(paths: Paths, out):
+    dc = load(paths, "decision")["decision_curve"]
+    t = np.array(dc["threshold"])
+    fig, ax = plt.subplots(figsize=(4.4, 3.2))
+    ax.plot(t, dc["calibrated"], color=BLUE, label="refer if p(needs treatment) >= threshold, calibrated")
+    ax.plot(t, dc["raw"], color=ORANGE, lw=1.3, label="same rule on raw softmax")
+    ax.plot(t, dc["refer_all"], color=GREY, ls="--", lw=1.2, label="refer everyone")
+    ax.axhline(0, color=AXIS, lw=0.8, zorder=0)
+    ax.text(0.49, 0.005, "refer no one", ha="right", va="bottom", fontsize=7, color=MUTED)
+    ax.set_xlabel("threshold probability")
+    ax.set_ylabel("net benefit (true referrals per image)")
+    ax.set_title(f"decision curve, prevalence {dc['prevalence']:.2f}")
+    ax.set_xlim(0, 0.5)
+    ax.set_ylim(-0.02, None)
+    ax.legend(loc="upper right")
+    fig.savefig(out / "decision_curve.png")
+    plt.close(fig)
+
+
 def confusion(paths: Paths, out):
-    meta, split, test = load_test(paths)
+    meta, split = load_split(paths, "audit")
+    test = split.test.values
     y = meta.label.values[test]
     fig, axes = plt.subplots(1, 2, figsize=(7.8, 3.7))
     for ax, cond, title in zip(axes, ("clean", "leaky"), ("lesion-disjoint training", "sibling images in training")):
@@ -190,10 +210,32 @@ def coverage(paths: Paths, out):
     plt.close(fig)
 
 
+def external(paths: Paths, out):
+    e = load(paths, "external")
+    groups = [g for g in ("leaky", "clean_size_matched", "full") if g in e["internal"]]
+    labels = {"leaky": "sibling images\nin training", "clean_size_matched": "lesion-disjoint,\nsize-matched", "full": "lesion-disjoint,\nall data"}
+    ext = {(r["group"], r["metric"]): r for r in e["table"] if r["kind"] == "value"}
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.2), sharex=True)
+    for ax, metric, title in zip(axes, ("bal_acc", "mel"), ("balanced accuracy", "melanoma recall")):
+        for i, g in enumerate(groups):
+            r_int = next(r for r in e["internal"][g] if r["metric"] == metric)
+            r_ext = ext[(g, metric)]
+            for dx, r, color, mfc, label in ((-0.12, r_int, BLUE, BLUE, "own HAM10000 test split"),
+                                             (0.12, r_ext, ORANGE, "white", "ISIC 2018 test set (external)")):
+                ax.errorbar(i + dx, r["point"], yerr=[[r["point"] - r["lo"]], [r["hi"] - r["point"]]], fmt="o", color=color,
+                            mfc=mfc, ms=6, mew=1.5, capsize=3, lw=1.2, label=label if i == 0 else None)
+        ax.set_xticks(range(len(groups)), [labels[g] for g in groups])
+        ax.set_title(title)
+        ax.set_ylim(0, 1)
+    axes[0].legend(loc="lower right")
+    fig.savefig(out / "external.png")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     paths = Paths()
     out = paths.results / "figures"
     out.mkdir(parents=True, exist_ok=True)
-    for make in (reliability, risk_coverage, frontier, confusion, coverage):
+    for make in (reliability, risk_coverage, frontier, decision_curve, confusion, coverage, external):
         make(paths, out)
         print("wrote", make.__name__)

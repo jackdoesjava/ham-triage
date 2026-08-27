@@ -1,8 +1,12 @@
 {
+ "split": "lesion",
+ "prefix": "full",
  "seeds": [
   0,
   1,
-  2
+  2,
+  3,
+  4
  ],
  "alpha": 0.1,
  "target_defer": 0.2,
@@ -11,352 +15,352 @@
   {
    "dx": "nv",
    "dx_type": "histo",
-   "n": 511,
-   "n_lesions": 460,
+   "n": 476,
+   "n_lesions": 256,
    "metric": "error_rate",
-   "point": 0.1448,
-   "lo": 0.1181,
-   "hi": 0.1726
+   "point": 0.1105,
+   "lo": 0.0841,
+   "hi": 0.1385
   },
   {
    "dx": "nv",
    "dx_type": "histo",
-   "n": 511,
-   "n_lesions": 460,
+   "n": 476,
+   "n_lesions": 256,
    "metric": "p_mel",
-   "point": 0.1249,
-   "lo": 0.1103,
-   "hi": 0.1407
+   "point": 0.0984,
+   "lo": 0.0833,
+   "hi": 0.1144
   },
   {
    "dx": "nv",
    "dx_type": "histo",
-   "n": 511,
-   "n_lesions": 460,
+   "n": 476,
+   "n_lesions": 256,
    "metric": "defer_rate",
-   "point": 0.379,
-   "lo": 0.3469,
-   "hi": 0.4106
+   "point": 0.3924,
+   "lo": 0.3612,
+   "hi": 0.422
   },
   {
    "dx": "nv",
    "dx_type": "histo",
-   "n": 511,
-   "n_lesions": 460,
+   "n": 476,
+   "n_lesions": 256,
    "metric": "refer_rate",
-   "point": 0.4625,
-   "lo": 0.4263,
-   "hi": 0.5
+   "point": 0.4218,
+   "lo": 0.3745,
+   "hi": 0.4648
   },
   {
    "dx": "nv",
    "dx_type": "histo",
-   "n": 511,
-   "n_lesions": 460,
+   "n": 476,
+   "n_lesions": 256,
    "metric": "mel_flag_rate",
-   "point": 0.4397,
-   "lo": 0.404,
-   "hi": 0.4767
+   "point": 0.3143,
+   "lo": 0.2699,
+   "hi": 0.3575
   },
   {
    "dx": "nv",
    "dx_type": "histo",
-   "n": 511,
-   "n_lesions": 460,
+   "n": 476,
+   "n_lesions": 256,
    "metric": "aps_set_size",
-   "point": 1.4064,
-   "lo": 1.3462,
-   "hi": 1.4659
+   "point": 1.3676,
+   "lo": 1.2937,
+   "hi": 1.4359
   },
   {
    "dx": "nv",
    "dx_type": "histo",
-   "n": 511,
-   "n_lesions": 460,
+   "n": 476,
+   "n_lesions": 256,
    "metric": "aps_coverage",
-   "point": 0.8871,
-   "lo": 0.8629,
-   "hi": 0.9095
+   "point": 0.9176,
+   "lo": 0.896,
+   "hi": 0.9374
   },
   {
    "dx": "nv",
    "dx_type": "follow_up",
-   "n": 715,
-   "n_lesions": 715,
+   "n": 751,
+   "n_lesions": 751,
    "metric": "error_rate",
-   "point": 0.0051,
-   "lo": 0.0014,
-   "hi": 0.0099
+   "point": 0.004,
+   "lo": 0.0016,
+   "hi": 0.0072
   },
   {
    "dx": "nv",
    "dx_type": "follow_up",
-   "n": 715,
-   "n_lesions": 715,
+   "n": 751,
+   "n_lesions": 751,
    "metric": "p_mel",
-   "point": 0.0048,
-   "lo": 0.0035,
-   "hi": 0.0064
+   "point": 0.0059,
+   "lo": 0.0046,
+   "hi": 0.0075
   },
   {
    "dx": "nv",
    "dx_type": "follow_up",
-   "n": 715,
-   "n_lesions": 715,
+   "n": 751,
+   "n_lesions": 751,
    "metric": "defer_rate",
-   "point": 0.11,
-   "lo": 0.094,
-   "hi": 0.1254
+   "point": 0.1252,
+   "lo": 0.1095,
+   "hi": 0.1412
   },
   {
    "dx": "nv",
    "dx_type": "follow_up",
-   "n": 715,
-   "n_lesions": 715,
+   "n": 751,
+   "n_lesions": 751,
    "metric": "refer_rate",
-   "point": 0.0247,
-   "lo": 0.0167,
-   "hi": 0.0333
+   "point": 0.0277,
+   "lo": 0.0205,
+   "hi": 0.0363
   },
   {
    "dx": "nv",
    "dx_type": "follow_up",
-   "n": 715,
-   "n_lesions": 715,
+   "n": 751,
+   "n_lesions": 751,
    "metric": "mel_flag_rate",
-   "point": 0.0224,
-   "lo": 0.0147,
-   "hi": 0.0306
+   "point": 0.0184,
+   "lo": 0.0124,
+   "hi": 0.025
   },
   {
    "dx": "nv",
    "dx_type": "follow_up",
-   "n": 715,
-   "n_lesions": 715,
+   "n": 751,
+   "n_lesions": 751,
    "metric": "aps_set_size",
-   "point": 0.9268,
-   "lo": 0.901,
-   "hi": 0.9512
+   "point": 0.9017,
+   "lo": 0.8774,
+   "hi": 0.9265
   },
   {
    "dx": "nv",
    "dx_type": "follow_up",
-   "n": 715,
-   "n_lesions": 715,
+   "n": 751,
+   "n_lesions": 751,
    "metric": "aps_coverage",
-   "point": 0.8974,
-   "lo": 0.8752,
-   "hi": 0.9179
+   "point": 0.8743,
+   "lo": 0.8519,
+   "hi": 0.8974
   },
   {
    "dx": "nv",
    "dx_type": "consensus",
-   "n": 104,
-   "n_lesions": 96,
+   "n": 110,
+   "n_lesions": 69,
    "metric": "error_rate",
-   "point": 0.0769,
-   "lo": 0.0381,
-   "hi": 0.1277
+   "point": 0.1309,
+   "lo": 0.0757,
+   "hi": 0.1895
   },
   {
    "dx": "nv",
    "dx_type": "consensus",
-   "n": 104,
-   "n_lesions": 96,
+   "n": 110,
+   "n_lesions": 69,
    "metric": "p_mel",
-   "point": 0.0603,
-   "lo": 0.041,
-   "hi": 0.0803
+   "point": 0.0995,
+   "lo": 0.0658,
+   "hi": 0.139
   },
   {
    "dx": "nv",
    "dx_type": "consensus",
-   "n": 104,
-   "n_lesions": 96,
+   "n": 110,
+   "n_lesions": 69,
    "metric": "defer_rate",
-   "point": 0.4199,
-   "lo": 0.3555,
-   "hi": 0.4914
+   "point": 0.3382,
+   "lo": 0.2712,
+   "hi": 0.4049
   },
   {
    "dx": "nv",
    "dx_type": "consensus",
-   "n": 104,
-   "n_lesions": 96,
+   "n": 110,
+   "n_lesions": 69,
    "metric": "refer_rate",
-   "point": 0.2981,
-   "lo": 0.2245,
-   "hi": 0.3758
+   "point": 0.44,
+   "lo": 0.3441,
+   "hi": 0.5415
   },
   {
    "dx": "nv",
    "dx_type": "consensus",
-   "n": 104,
-   "n_lesions": 96,
+   "n": 110,
+   "n_lesions": 69,
    "metric": "mel_flag_rate",
-   "point": 0.2756,
-   "lo": 0.2041,
-   "hi": 0.3521
+   "point": 0.3236,
+   "lo": 0.2313,
+   "hi": 0.4212
   },
   {
    "dx": "nv",
    "dx_type": "consensus",
-   "n": 104,
-   "n_lesions": 96,
+   "n": 110,
+   "n_lesions": 69,
    "metric": "aps_set_size",
-   "point": 1.2981,
-   "lo": 1.1913,
-   "hi": 1.4233
+   "point": 1.3455,
+   "lo": 1.2068,
+   "hi": 1.4925
   },
   {
    "dx": "nv",
    "dx_type": "consensus",
-   "n": 104,
-   "n_lesions": 96,
+   "n": 110,
+   "n_lesions": 69,
    "metric": "aps_coverage",
-   "point": 0.9263,
-   "lo": 0.8855,
-   "hi": 0.963
+   "point": 0.9145,
+   "lo": 0.875,
+   "hi": 0.9505
   },
   {
    "dx": "bkl",
    "dx_type": "histo",
    "n": 141,
-   "n_lesions": 133,
+   "n_lesions": 91,
    "metric": "error_rate",
-   "point": 0.357,
-   "lo": 0.2869,
-   "hi": 0.4276
+   "point": 0.3801,
+   "lo": 0.2959,
+   "hi": 0.4556
   },
   {
    "dx": "bkl",
    "dx_type": "histo",
    "n": 141,
-   "n_lesions": 133,
+   "n_lesions": 91,
    "metric": "p_mel",
-   "point": 0.1125,
-   "lo": 0.086,
-   "hi": 0.1399
+   "point": 0.16,
+   "lo": 0.1208,
+   "hi": 0.2017
   },
   {
    "dx": "bkl",
    "dx_type": "histo",
    "n": 141,
-   "n_lesions": 133,
+   "n_lesions": 91,
    "metric": "defer_rate",
-   "point": 0.3901,
-   "lo": 0.3259,
-   "hi": 0.4506
+   "point": 0.2851,
+   "lo": 0.2281,
+   "hi": 0.3438
   },
   {
    "dx": "bkl",
    "dx_type": "histo",
    "n": 141,
-   "n_lesions": 133,
+   "n_lesions": 91,
    "metric": "refer_rate",
-   "point": 0.5343,
-   "lo": 0.4653,
-   "hi": 0.6076
+   "point": 0.6709,
+   "lo": 0.5966,
+   "hi": 0.7456
   },
   {
    "dx": "bkl",
    "dx_type": "histo",
    "n": 141,
-   "n_lesions": 133,
+   "n_lesions": 91,
    "metric": "mel_flag_rate",
-   "point": 0.4421,
-   "lo": 0.3747,
-   "hi": 0.514
+   "point": 0.4553,
+   "lo": 0.3789,
+   "hi": 0.5383
   },
   {
    "dx": "bkl",
    "dx_type": "histo",
    "n": 141,
-   "n_lesions": 133,
+   "n_lesions": 91,
    "metric": "aps_set_size",
-   "point": 1.8794,
-   "lo": 1.7343,
-   "hi": 2.0304
+   "point": 2.044,
+   "lo": 1.8796,
+   "hi": 2.1971
   },
   {
    "dx": "bkl",
    "dx_type": "histo",
    "n": 141,
-   "n_lesions": 133,
+   "n_lesions": 91,
    "metric": "aps_coverage",
-   "point": 0.8203,
-   "lo": 0.7672,
-   "hi": 0.8764
+   "point": 0.8496,
+   "lo": 0.7964,
+   "hi": 0.8984
   },
   {
    "dx": "bkl",
    "dx_type": "consensus",
-   "n": 53,
-   "n_lesions": 52,
+   "n": 65,
+   "n_lesions": 51,
    "metric": "error_rate",
-   "point": 0.1824,
-   "lo": 0.1061,
-   "hi": 0.2667
+   "point": 0.2277,
+   "lo": 0.1219,
+   "hi": 0.3358
   },
   {
    "dx": "bkl",
    "dx_type": "consensus",
-   "n": 53,
-   "n_lesions": 52,
+   "n": 65,
+   "n_lesions": 51,
    "metric": "p_mel",
-   "point": 0.0834,
-   "lo": 0.0447,
-   "hi": 0.1351
+   "point": 0.1105,
+   "lo": 0.0516,
+   "hi": 0.1771
   },
   {
    "dx": "bkl",
    "dx_type": "consensus",
-   "n": 53,
-   "n_lesions": 52,
+   "n": 65,
+   "n_lesions": 51,
    "metric": "defer_rate",
-   "point": 0.4151,
-   "lo": 0.3188,
-   "hi": 0.5139
+   "point": 0.3754,
+   "lo": 0.2912,
+   "hi": 0.4609
   },
   {
    "dx": "bkl",
    "dx_type": "consensus",
-   "n": 53,
-   "n_lesions": 52,
+   "n": 65,
+   "n_lesions": 51,
    "metric": "refer_rate",
-   "point": 0.283,
-   "lo": 0.1805,
-   "hi": 0.394
+   "point": 0.3631,
+   "lo": 0.2509,
+   "hi": 0.4688
   },
   {
    "dx": "bkl",
    "dx_type": "consensus",
-   "n": 53,
-   "n_lesions": 52,
+   "n": 65,
+   "n_lesions": 51,
    "metric": "mel_flag_rate",
-   "point": 0.2767,
-   "lo": 0.1778,
-   "hi": 0.381
+   "point": 0.2615,
+   "lo": 0.1677,
+   "hi": 0.365
   },
   {
    "dx": "bkl",
    "dx_type": "consensus",
-   "n": 53,
-   "n_lesions": 52,
+   "n": 65,
+   "n_lesions": 51,
    "metric": "aps_set_size",
-   "point": 1.4969,
-   "lo": 1.2807,
-   "hi": 1.7302
+   "point": 1.5569,
+   "lo": 1.3857,
+   "hi": 1.7292
   },
   {
    "dx": "bkl",
    "dx_type": "consensus",
-   "n": 53,
-   "n_lesions": 52,
+   "n": 65,
+   "n_lesions": 51,
    "metric": "aps_coverage",
-   "point": 0.8616,
-   "lo": 0.7799,
-   "hi": 0.9402
+   "point": 0.8462,
+   "lo": 0.7608,
+   "hi": 0.928
   }
  ]
 }

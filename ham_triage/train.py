@@ -2,8 +2,10 @@ import argparse
 import json
 import math
 import os
+import sys
 import time
 from dataclasses import asdict, replace
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -59,7 +61,7 @@ def class_weights(train_labels: np.ndarray, beta: float = 0.9999) -> torch.Tenso
 
 
 def train(cfg: TrainConfig, images: np.ndarray, labels: np.ndarray, train_idx: np.ndarray,
-          seed: int, device: str = "cuda"):
+          seed: int, device: str = "cuda", resume: Path | None = None):
     torch.manual_seed(seed)
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
@@ -80,8 +82,24 @@ def train(cfg: TrainConfig, images: np.ndarray, labels: np.ndarray, train_idx: n
     weight = class_weights(labels[train_idx]).to(device) if cfg.loss == "cb" else None
     rng = np.random.default_rng(seed)
     curve = []
+    start = 0
+    if resume is not None and resume.exists():
+        # a run killed mid-way continues from its last completed epoch; the data order
+        # is replayed by drawing the same permutations the finished epochs used
+        state = torch.load(resume, map_location=device, weights_only=False)
+        model.load_state_dict(state["model"])
+        opt.load_state_dict(state["opt"])
+        sched.load_state_dict(state["sched"])
+        scaler.load_state_dict(state["scaler"])
+        torch.set_rng_state(state["torch_rng"].cpu())
+        if device == "cuda":
+            torch.cuda.set_rng_state(state["cuda_rng"].cpu())
+        curve, start = state["curve"], state["epoch"]
+        for _ in range(start):
+            rng.permutation(train_idx)
+        print(f"resumed at epoch {start}", flush=True)
     t0 = time.time()
-    for epoch in range(cfg.epochs):
+    for epoch in range(start, cfg.epochs):
         model.train()
         order = rng.permutation(train_idx)
         loss_sum = 0.0
@@ -101,6 +119,11 @@ def train(cfg: TrainConfig, images: np.ndarray, labels: np.ndarray, train_idx: n
         curve.append(loss_sum / steps_per_epoch)
         print(f"epoch {epoch + 1}/{cfg.epochs}  loss {curve[-1]:.4f}  "
               f"lr {sched.get_last_lr()[0]:.2e}  {time.time() - t0:.0f}s", flush=True)
+        if resume is not None:
+            torch.save({"model": model.state_dict(), "opt": opt.state_dict(), "sched": sched.state_dict(),
+                        "scaler": scaler.state_dict(), "torch_rng": torch.get_rng_state(),
+                        "cuda_rng": torch.cuda.get_rng_state() if device == "cuda" else None,
+                        "curve": curve, "epoch": epoch + 1}, resume)
     return model, curve
 
 
@@ -125,7 +148,10 @@ def main():
     p.add_argument("--loss", default="ce")
     p.add_argument("--epochs", type=int)
     p.add_argument("--device", default="cuda")
+    p.add_argument("--log", help="write progress here instead of stdout; for runs launched without a console")
     args = p.parse_args()
+    if args.log:
+        sys.stdout = sys.stderr = open(args.log, "a", buffering=1)
     cfg = TrainConfig(loss=args.loss)
     if args.epochs:
         cfg = replace(cfg, epochs=args.epochs)
@@ -141,12 +167,12 @@ def main():
     train_idx = np.flatnonzero(split[args.train_col].values)
     labels = meta.label.values.astype(np.int64)
 
-    t0 = time.time()
-    model, curve = train(cfg, images, labels, train_idx, args.seed, args.device)
-    logits = predict(model, images, cfg, args.device)
-
     run_dir = paths.results / "runs" / args.run_id
     run_dir.mkdir(parents=True, exist_ok=True)
+    t0 = time.time()
+    model, curve = train(cfg, images, labels, train_idx, args.seed, args.device, resume=run_dir / "resume.pt")
+    logits = predict(model, images, cfg, args.device)
+    (run_dir / "resume.pt").unlink(missing_ok=True)
     frame = pd.DataFrame(logits, columns=[f"logit_{c}" for c in CLASSES])
     frame.insert(0, "image_id", meta.image_id.values)
     frame.to_parquet(run_dir / "logits.parquet", index=False)

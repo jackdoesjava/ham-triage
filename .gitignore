@@ -4,3 +4,4 @@ __pycache__/
 data/
 results/runs/*/checkpoint.pt
 .pytest_cache/
+results/runs/*/resume.pt
